@@ -1,0 +1,18 @@
+﻿body {
+    font-family: Calibri;
+    font-size: 17px;
+}
+
+.get_sub {
+    float: left;
+    margin-right: 7px;
+}
+
+.l {
+    float: left;
+}
+
+.cls {
+    clear: both;
+}
+
