@@ -100,7 +100,35 @@ namespace mvc.business
             conn.Close();
 
             conn.Dispose();
-        } 
+        }
+        public static int get_c_count(string tb, string col
+                                     )
+        {
+            SqlConnection conn = get_conn();
+
+            string sq = "select col_length('" + tb + "', '" + col + "'" +
+                                          ") as c";
+
+            SqlDataReader SDR = run_query(sq, ref conn
+                                          );
+
+            int c = 0;
+
+            if (SDR.Read()
+                )
+                c = get_i(SDR, "c"
+                          );
+
+            SDR.Close();
+
+            SDR.Dispose();
+
+            conn.Close();
+
+            conn.Dispose();
+
+            return c;
+        }
 
     public
     class prm_p
@@ -133,5 +161,5 @@ namespace mvc.business
             curs.Add(prm);
         }
     }
-}
+        }
     }

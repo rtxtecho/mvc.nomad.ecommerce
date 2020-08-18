@@ -37,3 +37,6 @@ C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\bin\Antlr3.Runtime.pdb
 C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\bin\Newtonsoft.Json.xml
 C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\obj\Debug\mvc.dll
 C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\obj\Debug\mvc.pdb
+C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\obj\Debug\mvc.csprojResolveAssemblyReference.cache
+C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\obj\Debug\mvc.Properties.Resources.resources
+C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\obj\Debug\mvc.csproj.GenerateResource.Cache

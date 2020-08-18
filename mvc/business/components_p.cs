@@ -25,6 +25,31 @@ namespace mvc.business
             return comp;
         }
 
+        public static component_p get(int ID
+                                                     )
+        {
+            string r = "select * from component where ID = " + ID;
+
+            SqlConnection conn = null;
+
+            SqlDataReader SDR = sql_code.run_query(r, ref conn
+                                                  );
+
+            component_p comp = null;
+
+            if (SDR.Read()
+                )
+                comp = get(SDR);
+
+            SDR.Close();
+
+            conn.Close();
+
+            conn.Dispose();
+
+            return comp;
+        }
+
         public static List<component_p> get_sub_comps(int comp
                                                      )
         {
@@ -55,6 +80,3 @@ namespace mvc.business
         }
     }
 }
-
-
-                        
