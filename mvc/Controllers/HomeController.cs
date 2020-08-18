@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Web.UI;
 using System.Web.Mvc;
 using mvc.business;
 
@@ -11,22 +11,9 @@ namespace mvc.Controllers
     {
         public string s240 = "" + (char)240;
 
+        [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -34,7 +21,12 @@ namespace mvc.Controllers
                                     int comp
                                    )
         {
-            List<component_p> comps = components_p.get_sub_comps(0);
+            component_p compo = new business.component_p();
+
+            compo.name = "zzzzzzzzzzzz";
+
+            compo.submit();
+            List<component_p> comps = components_p.get_sub_comps(comp);
 
             string r = "";
 
@@ -65,17 +57,18 @@ namespace mvc.Controllers
                      ">";
 
                 r += "</div>";
-            }
 
+                r += "<div " +
+                            "class = 'sub_comps" +
+                                    "'" + " " +
+                            "id = 'sub_comps_" + c.ID +
+                                  "'" +
+                     ">";
+
+                r += "</div>";
+            }
             return r + s240 + comp;
         }
-
-        public string returnn2(string prm
-                              )
-        {
-            return "returnn " + prm;
-        }
-
     }
 }
 

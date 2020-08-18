@@ -1,5 +1,12 @@
 ﻿var s240 = String.fromCharCode(240);
 
+$.ajax({ cache: false });
+
+$.ajaxSetup({
+    // Disable caching of AJAX responses
+    cache: false
+});
+
 function get_sub_comps(
                         comp
                       )
@@ -11,7 +18,8 @@ function get_sub_comps(
          },
         function (r) {
             r = r.split(s240);
-            $("#resu").html(r[0]);
+            $("#sub_comps_" + r[1]
+            ).html(r[0]);
         });
 }
 

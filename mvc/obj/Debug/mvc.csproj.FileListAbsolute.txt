@@ -35,6 +35,5 @@ C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\bin\System.Web.WebPages.Dep
 C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\bin\System.Web.WebPages.Razor.xml
 C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\bin\Antlr3.Runtime.pdb
 C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\bin\Newtonsoft.Json.xml
-C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\obj\Debug\mvc.csprojResolveAssemblyReference.cache
 C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\obj\Debug\mvc.dll
 C:\codes\mvc nomad ecommerce\mvc.nomad.ecommerce\mvc\obj\Debug\mvc.pdb

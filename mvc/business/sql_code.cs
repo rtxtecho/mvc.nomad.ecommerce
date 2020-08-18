@@ -1,4 +1,8 @@
-﻿using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+
+using System.Data.SqlClient;
+
+using System.Data;
 
 namespace mvc.business
 {
@@ -67,5 +71,67 @@ namespace mvc.business
 
             return SDR;
         }
+
+        public static void run_non_query(string query, prms_p prms
+                                             )
+        {
+            SqlConnection
+            conn = get_conn();
+
+            SqlCommand cnt = new SqlCommand();
+
+            cnt.Connection = conn;
+
+            cnt.CommandText = query;
+
+            foreach (prm_p prm in prms.curs
+                    )
+            {
+                cnt.Parameters.Add("@" + prm.pseudo, prm.type
+                                   );
+
+                cnt.Parameters["@" + prm.pseudo].Value = prm.content;
+            }
+
+            cnt.ExecuteNonQuery();
+
+            cnt.Dispose();
+
+            conn.Close();
+
+            conn.Dispose();
+        } 
+
+    public
+    class prm_p
+    {
+        public
+        string pseudo = "";
+        public
+        string content;
+        public
+        SqlDbType type;
+    }
+
+    public class prms_p
+    {
+        public
+        List<prm_p>
+            curs = new List<prm_p>();
+
+        public void enroll(string pseudo, string content, SqlDbType type
+                          )
+        {
+            prm_p prm = new prm_p();
+
+            prm.pseudo = pseudo;
+
+            prm.content = content;
+
+            prm.type = type;
+
+            curs.Add(prm);
+        }
     }
 }
+    }

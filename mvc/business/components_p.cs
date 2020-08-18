@@ -28,7 +28,7 @@ namespace mvc.business
         public static List<component_p> get_sub_comps(int comp
                                                      )
         {
-            string r = "select * from components where super_comp = " + comp;
+            string r = "select * from component where super_comp = " + comp;
 
             SqlConnection conn = null;
 
