@@ -45,21 +45,28 @@ namespace mvc.business
 
             sql_code.run_non_query(r, prms
                                   );
-            }    
-        
+            }
 
 
 
 
 
-        
 
 
-       public void revise(string column, string content
-                                )
+
+
+        public void revise(string column, string content
+                                 )
         {
             sql_code.revise("component", column, content, ID
                             );
-            }
+        }
+
+        public void revise(string column, int content
+                                        )
+        {
+            sql_code.revise("component", column, content, ID
+                            );
+        }
         }
     }

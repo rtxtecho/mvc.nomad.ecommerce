@@ -107,6 +107,13 @@ namespace mvc.business
             return SDR;
         }
 
+        public static void run_non_query(string query
+                                             )
+        {
+            run_non_query(query, null
+                         );
+        }
+
         public static void run_non_query(string query, prms_p prms
                                              )
         {
@@ -119,6 +126,11 @@ namespace mvc.business
 
             cnt.CommandText = query;
 
+            if (prms == null
+                )
+            {
+            }
+            else
             prms.decompile(ref cnt);
 
             cnt.ExecuteNonQuery();
@@ -129,6 +141,7 @@ namespace mvc.business
 
             conn.Dispose();
         }
+
         public static int get_c_count(string tb, string col
                                      )
         {
@@ -172,7 +185,20 @@ namespace mvc.business
                          );
         }
 
-    public
+        public static void revise(string tb, string column, int content, int ID
+                                  )
+        {
+            string query = "update " + tb + " " +
+                                     "set " + column + " = " + content +
+                                          " where ID = " + ID;
+
+            sql_code.prms_p prms = new prms_p();
+
+            run_non_query(query
+                         );
+        }
+
+        public
     class prm_p
     {
         public
@@ -232,5 +258,3 @@ namespace mvc.business
         }
         }
     }
-
-            

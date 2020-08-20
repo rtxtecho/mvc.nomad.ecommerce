@@ -279,6 +279,7 @@ namespace mvc.Controllers
             return edit_comp_name_generic(cur, method
                                            );
         }
+
         public string edit_comp_name2(int comp, string cur, int c_serv
                                       )
         {
@@ -316,6 +317,37 @@ namespace mvc.Controllers
         public string create_sub_comp_type(int c_serv
                                           )
         {
+            string method = "create_sub_comp_type2";
+
+            return edit_comp_type_generic(method, ""
+                                           );
+        }
+
+        public string edit_comp_type(int comp, int c_serv
+                                          )
+        {
+            string method = "edit_comp_type2";
+
+            return edit_comp_type_generic(method, comp.ToString()
+                                          );
+        }
+
+        public string edit_comp_type2(int comp, int type, int c_serv
+                                          )
+        {
+            component_p c = components_p.get(comp);
+
+            c.revise("comp_type", type
+                    );
+
+            type_ r = type_s.get(type);
+
+            return comp + s240 + r.type;
+        }
+
+        public string edit_comp_type_generic(string method, string prms
+                                          )
+        {
             List<type_> types = type_s.get();
 
             string r = "<br>";
@@ -323,12 +355,17 @@ namespace mvc.Controllers
             foreach (type_ ty in types
                     )
             {
-                string prms = ty.ID + ",'" + ty.type +
+                string prms2 = ty.ID + ",'" + ty.type +
                                          "'";
 
-                r += Properties.Resources.ht_srs.Replace("//method//", "create_sub_comp_type2"
+                if (!prms.Equals("")
+                    )
+                    prms2 += ", " +
+                          prms;
+
+                r += Properties.Resources.ht_srs.Replace("//method//", method
                                                         )
-                                                .Replace("//prms//", prms
+                                                .Replace("//prms//", prms2
                                                         )
                                                 .Replace("//content//", ty.type
                                                         );
@@ -337,7 +374,7 @@ namespace mvc.Controllers
             string topic = "Choose the type";
 
             return r + s240 + topic;
-        }
+        }        
 
         public string create_sub_comp_img(int c_serv
                                           )
@@ -350,3 +387,4 @@ namespace mvc.Controllers
         }
         }
     }
+        

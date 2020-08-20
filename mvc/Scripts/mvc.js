@@ -348,6 +348,51 @@ function create_sub_comp_type2(ID, cur
     progress_stop();
 }
 
+function edit_comp_type(comp) {
+    progress_go();
+    c_serv++;
+    var url = "/Home/edit_comp_type";
+    $.get(url,
+         {
+             comp: comp,
+             c_serv: c_serv
+         },
+    function (r) {
+
+        progress_stop();
+
+        r = r.split(s240);
+
+        sub_scrn_go(r[0], r[1]
+                   );
+    });
+}
+
+function edit_comp_type2(ID, cur, comp
+                          )
+{
+    progress_go();
+    c_serv++;
+    var url = "/Home/edit_comp_type2";
+    $.get(url,
+         {
+             type: ID,
+             comp: comp,
+             c_serv: c_serv
+         },
+    function (r) {
+        progress_stop();
+        sub_scrn_stop();
+        r = r.split(s240);
+        $("#edit_comp_type_"
+            ).html(r[1]
+                  );
+        $("#comp_type" + "_" + r[0]
+                    ).html(r[1]
+                          );
+    });
+}
+
 function create_sub_comp_img() {
     progress_go();
     c_serv++;
