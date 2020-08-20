@@ -78,8 +78,9 @@ namespace mvc.Controllers
 
                     proc.StartInfo.FileName = "certutil";
 
-                    proc.StartInfo.Arguments = " -encode " + from + " " + to;
-
+                    proc.StartInfo.Arguments = " -encode " + "\"" + from +
+                                                             "\" \"" + to +
+                                                                 "\"";
                     proc.Start();
 
                     proc.WaitForExit();
