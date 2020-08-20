@@ -92,3 +92,34 @@
     cursor: pointer;
     border-bottom: solid 1px rgb(177, 177, 177);
 }
+
+.create_sub_comp_img_content
+{    
+    max-height: 177px;
+     max-width: 177px;
+      margin-top: 7px;
+       margin-bottom: 7px;
+}
+
+.comp_img
+{
+    max-height: 22px;
+     max-width: 22px;
+      margin-right: 7px;
+}
+
+.tree
+{
+    padding-right: 17px;
+    border-right: solid 1px rgb(177, 177, 177);
+    float: left;
+}
+
+.comp_content
+{
+    margin-left: -1px;
+    padding-left: 17px;
+    border-left: solid 1px rgb(177, 177, 177);
+    float: left;
+}
+    

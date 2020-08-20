@@ -5,27 +5,32 @@
 @{
     ViewBag.Title = "Home Page";
 }
-<body 
->
+<body>
     <div 
-              onclick="get_sub_comps(0);" 
+                   class="tree"
+                   id = "tree"
     >
+    <div onclick="get_sub_comps(0);">
         get
     </div>
 
-    <div
-           id="sub_comps_0"
-    >
+    <div id="sub_comps_0">
+    </div>
     </div>
 
     <div 
-          class = 'progress_bg'
-          id = "progress_bg"
+                   class="comp_content"
+                   id = "comp_content"
     >
     </div>
-
-    <script type="text/javascript"
+    <div  
+               class="cls"
     >
+    </div>
+    <div class='progress_bg'
+         id="progress_bg">
+    </div>
+    <script type="text/javascript">
     progress_stop();
     </script>
 
@@ -51,21 +56,17 @@
 
     <div class="sub_scrn_bg sub_scrn_bg2"
          id="sub_scrn_bg2"
-         onclick="sub_scrn2_stop();"
-    >
+         onclick="sub_scrn2_stop();">
     </div>
 
     <div class="sub_scrn sub_scrn2"
-         id="sub_scrn2"
-         >
+         id="sub_scrn2">
         <div class="sub_scrn_topic"
-             id="sub_scrn_topic2"
-             >
+             id="sub_scrn_topic2">
         </div>
 
         <div class="sub_scrn_content"
-             id="sub_scrn_content2"
-             >
+             id="sub_scrn_content2">
         </div>
     </div>
 

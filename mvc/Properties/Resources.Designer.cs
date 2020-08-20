@@ -62,6 +62,54 @@ namespace mvc.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;div 
+        ///     class=&quot;&quot;
+        ///     id=&quot;create_sub_comp_img_ni&quot;
+        ///&gt;
+        ///    &lt;i&gt;Not Identified
+        ///    &lt;/i&gt;
+        ///&lt;/div&gt;
+        ///&lt;img
+        ///     class=&quot;create_sub_comp_img_content&quot;
+        ///     src=&quot;&quot;
+        ///     id=&quot;create_sub_comp_img_content&quot;
+        ////&gt;.
+        /// </summary>
+        internal static string ht_create_sub_comp_img {
+            get {
+                return ResourceManager.GetString("ht_create_sub_comp_img", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;form id=&quot;file_form&quot;
+        ///      action=&quot;&quot;&gt;
+        ///    Choose Your Files:
+        ///    &lt;input type=&quot;file&quot; id=&quot;file&quot; name=&quot;file&quot; /&gt;
+        ///    &lt;input id=&quot;btUpload&quot; type=&quot;button&quot; value=&quot;Upload File&quot; /&gt;
+        ///    &lt;p&gt;&lt;/p&gt;
+        ///&lt;/form&gt;
+        ///&lt;script&gt;
+        ///    $(document).ready(function () {
+        ///        $(&quot;#btUpload&quot;).click(function () {
+        ///
+        ///            var data =
+        ///                new FormData($(&quot;form&quot;)[0]);
+        ///
+        ///            alert(data);
+        ///
+        ///            $.ajax({
+        ///                type: &quot;POST&quot;,
+        ///                url: &quot;/api/file/&quot;,
+        ///                enctype: &apos;multipa [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ht_fi {
+            get {
+                return ResourceManager.GetString("ht_fi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;div 
         ///     class=&quot;rec_prim&quot;
         ///     id = &quot;//id//&quot;
         ///     onclick=&quot;//method//&quot;

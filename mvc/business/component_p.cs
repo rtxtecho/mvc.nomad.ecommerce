@@ -13,9 +13,9 @@ namespace mvc.business
 
         public int comp_type = 0;
 
-        public int super_comp = 0; 
+        public int super_comp = 0;
 
-
+        public string img = "";
 
 
 
@@ -25,10 +25,10 @@ namespace mvc.business
     {
         string r = "insert into component ";
 
-        r += " (name, comp_type, super_comp" +
+        r += " (name, comp_type, super_comp" + ", img" +
               ")";
 
-        r += " values (@name, " + comp_type + "," + super_comp +
+        r += " values (@name, " + comp_type + "," + super_comp + ", @img" +
                      ")";
 
         sql_code.
@@ -36,10 +36,29 @@ namespace mvc.business
 
         prms.enroll("name", name, System.Data.SqlDbType.Text
                    );
-        sql_code.run_non_query(r, prms
-                               );
+
+            prms.enroll("img", img, System.Data.SqlDbType.Text
+                       );
+
+            sql_code.run_non_query(r, prms
+                                   );
+    }
+        
+
+
+
+
+
+
+
+
+
+
+       public void revise(string column, string content
+                                )
+        {
+            sql_code.revise("component", column, content, ID
+                            );
             }
         }
     }
-
-        

@@ -10,154 +10,6 @@ $.ajaxSetup({
     cache: false
 });
 
-function get_sub_comps(
-                        comp
-                      )
-{
-    progress_go();
-    c_serv++;
-    var url = "/Home/get_sub_comps";
-    $.get(url,
-         {
-             comp: comp,
-             c_serv: c_serv
-         },
-    function (r) {
-        progress_stop();
-        r = r.split(s240);
-        $("#sub_comps_" + r[1]
-        ).html(r[0]);        
-    });
-}
-
-function create_sub_comp(
-                        comp
-                      ) {
-    progress_go();
-    c_serv++;
-    var url = "/Home/create_sub_comp";
-    $.get(url,
-         {
-             comp: comp,
-             c_serv: c_serv
-         },
-    function (r) {
-
-        progress_stop();
-
-        r = r.split(s240);
-
-        sub_scrn_go(r[0], r[1]
-                   );
-    });
-}
-
-function create_sub_comp2(
-                        comp
-                      ) {
-    progress_go();
-    var name = $("#create_sub_comp_name_"
-                ).html();
-    var type = $("#create_sub_comp_type"
-                ).attr("cur");
-    c_serv++;
-    var url = "/Home/create_sub_comp2";
-    $.get(url,
-         {
-             super_comp: comp,
-             name: name,
-             type: type,
-             c_serv: c_serv
-         },
-    function (r) {
-
-        progress_stop();
-
-        r = r.split(s240);
-
-        sub_scrn_go(r[0], r[1]
-                   );
-    });
-}
-
-function create_sub_comp_name() {
-    progress_go();
-    c_serv++;
-    var url = "/Home/create_sub_comp_name";
-    $.get(url,
-         {
-             c_serv: c_serv
-         },
-    function (r) {
-
-        progress_stop();
-
-        r = r.split(s240);
-
-        sub_scrn2_go(r[0], r[1]
-                   );
-    });
-}
-
-function create_sub_comp_name2() {
-    progress_go();
-    c_serv++;
-
-    var cur = $("#t_bo_create_sub_comp_name"
-                ).val();
-sub_scrn2_stop();
-    cur = cur.trim();
-
-    if (cur == ""
-       ) cur = ni;
-
-    $("#create_sub_comp_name_"
-     ).html(cur);
-
-    progress_stop();
-
-}
-
-function create_sub_comp_type() {
-    progress_go();
-    c_serv++;
-    var url = "/Home/create_sub_comp_type";
-    $.get(url,
-         {
-             c_serv: c_serv
-         },
-    function (r) {
-
-        progress_stop();
-
-        r = r.split(s240);
-
-        sub_scrn2_go(r[0], r[1]
-                   );
-    });
-}
-
-function create_sub_comp_type2(ID, cur
-                               ) {
-    progress_go();
-    c_serv++;
-
-    sub_scrn2_stop();
-    cur = cur.trim();
-
-    if (cur == ""
-       ) cur = ni;
-
-    $("#create_sub_comp_type"
-     ).attr("cur", ID
-            );
-
-    $("#create_sub_comp_type_"
-     ).html(cur);
-
-    progress_stop();
-}
-
 function progress_go() {
     $("#progress_bg"
      ).css("display", ""
@@ -252,8 +104,7 @@ function sub_scrn2_go(
       );
 }
 
-function sub_scrn2_stop()
-{
+function sub_scrn2_stop() {
     $("#sub_scrn2"
      ).css("display", "none"
           );
@@ -261,4 +112,230 @@ function sub_scrn2_stop()
     $("#sub_scrn_bg2"
          ).css("display", "none"
               );
+}
+
+function get_sub_comps(
+                        comp
+                      ) {
+    progress_go();
+    c_serv++;
+    var url = "/Home/get_sub_comps";
+    $.get(url,
+         {
+             comp: comp,
+             c_serv: c_serv
+         },
+    function (r) {
+        progress_stop();
+        r = r.split(s240);
+        $("#sub_comps_" + r[1]
+        ).html(r[0]);
+    });
+}
+
+function get_comp(
+                        comp
+                      ) {
+    progress_go();
+    c_serv++;
+    var url = "/Home/get_comp";
+    $.get(url,
+         {
+             comp: comp,
+             c_serv: c_serv
+         },
+    function (r) {
+        progress_stop();
+        $("#comp_content"
+        ).html(r);
+    });
+}
+
+function create_sub_comp(
+                        comp
+                      ) {
+    progress_go();
+    c_serv++;
+    var url = "/Home/create_sub_comp";
+    $.get(url,
+         {
+             comp: comp,
+             c_serv: c_serv
+         },
+    function (r) {
+
+        progress_stop();
+
+        r = r.split(s240);
+
+        sub_scrn_go(r[0], r[1]
+                   );
+    });
+}
+
+function create_sub_comp2(
+                        comp
+                      ) {
+    progress_go();
+    var name = $("#create_sub_comp_name"
+                ).attr("cur");
+    if (name == undefined
+        )
+        name = "";
+    var type = $("#create_sub_comp_type"
+                ).attr("cur");
+    if (type == undefined
+        )
+        type = 0;
+    var img = $( "#create_sub_comp_img_content"
+               ).attr("src");
+    if (img == undefined
+        )
+        img = "";
+
+    c_serv++;
+    var url = "/Home/create_sub_comp2";
+    $.get(url,
+         {
+             super_comp: comp,
+             name: name,
+             type: type,
+             img: img,
+             c_serv: c_serv
+         },
+    function (r) {
+        progress_stop();
+        r = r.split(s240);
+        if (r[0] == 0
+            ) 
+        {
+            sub_scrn_stop();
+            get_sub_comps(r[1]);                         
+            return;
+        }
+        sub_scrn2_go(r[1], "Issues"
+                    );
+    });
+}
+
+function create_sub_comp_name() {
+    progress_go();
+    c_serv++;
+    var url = "/Home/create_sub_comp_name";
+    $.get(url,
+         {
+             c_serv: c_serv
+         },
+    function (r) {
+
+        progress_stop();
+
+        r = r.split(s240);
+
+        sub_scrn2_go(r[0], r[1]
+                   );
+    });
+}
+
+function create_sub_comp_name2() {
+    progress_go();
+    c_serv++;
+
+    var cur = $("#t_bo_create_sub_comp_name"
+                ).val();
+    sub_scrn2_stop();
+    cur = cur.trim();
+
+    $("#create_sub_comp_name"
+     ).attr("cur", cur
+           );
+
+    if (cur == ""
+       ) cur = ni;
+
+    $("#create_sub_comp_name_"
+     ).html(cur);
+
+    progress_stop();
+}
+
+function create_sub_comp_type() {
+    progress_go();
+    c_serv++;
+    var url = "/Home/create_sub_comp_type";
+    $.get(url,
+         {
+             c_serv: c_serv
+         },
+    function (r) {
+
+        progress_stop();
+
+        r = r.split(s240);
+
+        sub_scrn2_go(r[0], r[1]
+                   );
+    });
+}
+
+function create_sub_comp_type2(ID, cur
+                               ) {
+    progress_go();
+    c_serv++;
+
+    sub_scrn2_stop();
+    cur = cur.trim();
+
+    if (cur == ""
+       ) cur = ni;
+
+    $("#create_sub_comp_type"
+     ).attr("cur", ID
+            );
+
+    $("#create_sub_comp_type_"
+     ).html(cur);
+
+    progress_stop();
+}
+
+function create_sub_comp_img() {
+    progress_go();
+    c_serv++;
+    var url = "/Home/create_sub_comp_img";
+    $.get(url,
+         {
+             c_serv: c_serv
+         },
+    function (r) {
+
+        progress_stop();
+
+        r = r.split(s240);
+
+        sub_scrn2_go(r[0], r[1]
+                   );
+    });
+}
+
+function create_sub_comp_img2(r) {
+    sub_scrn2_stop();
+    r = r.split(s240);
+    progress_go();
+    c_serv++;
+    var src = "data:image/" + r[2] + ";base64," + r[1];
+    $("#create_sub_comp_img_ni"
+     ).css("display", "none"
+           );
+    $("#create_sub_comp_img_content"
+        ).attr("src", src
+               );
+    $("#create_sub_comp_img"
+        ).attr("cur", r[1]
+               );
+    $("#create_sub_comp_img"
+        ).attr("format", r[2]
+               );
+    progress_stop();
+
 }

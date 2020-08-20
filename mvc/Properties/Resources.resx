@@ -117,6 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ht_create_sub_comp_img" xml:space="preserve">
+    <value>&lt;div 
+     class=""
+     id="create_sub_comp_img_ni"
+&gt;
+    &lt;i&gt;Not Identified
+    &lt;/i&gt;
+&lt;/div&gt;
+&lt;img
+     class="create_sub_comp_img_content"
+     src=""
+     id="create_sub_comp_img_content"
+/&gt;</value>
+  </data>
+  <data name="ht_fi" xml:space="preserve">
+    <value>&lt;form id="file_form"
+      action=""&gt;
+    Choose Your Files:
+    &lt;input type="file" id="file" name="file" /&gt;
+    &lt;input id="btUpload" type="button" value="Upload File" /&gt;
+    &lt;p&gt;&lt;/p&gt;
+&lt;/form&gt;
+&lt;script&gt;
+    $(document).ready(function () {
+        $("#btUpload").click(function () {
+
+            var data =
+                new FormData($("form")[0]);
+
+            alert(data);
+
+            $.ajax({
+                type: "POST",
+                url: "/api/file/",
+                enctype: 'multipart/form-data',
+                contentType: false,
+                processData: false,
+                cache: false,
+                data: data,
+                success: function (data, textStatus, xhr) {
+                    create_sub_comp_img2(data);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(textStatus + ': ' + errorThrown);
+                }
+            });
+        });
+    });
+&lt;/script&gt;</value>
+  </data>
   <data name="ht_rec" xml:space="preserve">
     <value>&lt;div 
      class="rec_prim"

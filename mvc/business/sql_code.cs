@@ -59,6 +59,16 @@ namespace mvc.business
         public static SqlDataReader run_query(string query, ref SqlConnection conn
                                              )
         {
+            sql_code.prms_p prms = new business.sql_code.prms_p();
+
+            return run_query(query, prms, ref conn
+                            );
+        }
+
+        public static SqlDataReader run_query(string query, sql_code.prms_p prms,
+                                             ref SqlConnection conn
+                                              )
+        {
             conn = get_conn();
 
             SqlCommand cnt = new SqlCommand();
@@ -66,6 +76,15 @@ namespace mvc.business
             cnt.Connection = conn;
 
             cnt.CommandText = query;
+
+            foreach (prm_p prm in prms.curs
+                    )
+            {
+                cnt.Parameters.Add("@" + prm.pseudo, prm.type
+                                   );
+
+                cnt.Parameters["@" + prm.pseudo].Value = prm.content;
+            }
 
             SqlDataReader SDR = cnt.ExecuteReader();
 
@@ -128,6 +147,20 @@ namespace mvc.business
             conn.Dispose();
 
             return c;
+        }
+
+        public static void revise(string tb, string column, string content, int ID
+                                  )
+        {
+            string query = "update " + tb + " " +
+                                     "set " + column + " = @content" +
+                                          " where ID = " + ID;
+
+            sql_code.prms_p prms = new prms_p();
+            prms.enroll("content", content, SqlDbType.VarChar
+                       );
+            run_non_query(query, prms
+                         );
         }
 
     public

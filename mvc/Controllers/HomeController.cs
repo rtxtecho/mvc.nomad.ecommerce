@@ -1,4 +1,4 @@
-﻿using System.Text;
+﻿using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
@@ -32,6 +32,38 @@ namespace mvc.Controllers
                                                            )
                                                    .Replace("//id//", id
                                                            );
+            return r;
+        }
+
+        public string get_comp(
+                                    int comp, int c_serv
+                                   )
+        {
+            component_p comp_ = components_p.get(comp
+                                               );
+
+            string type = type_s.get(comp_.comp_type
+                                    ).type;
+
+            string r = "<u>Component</u><br><br>";
+
+            r += get_record("Name", comp_.name, "edit_comp_name(" + comp +
+                                                                  ");", "edit_comp_name"
+                           );
+
+            r += get_record("Type", type, "edit_comp_type(" + comp +
+                                                                 ");", "edit_comp_type"
+                          );
+
+            r += "<img " +
+                          "class = 'edit_comp_img" +
+                                  "'" +
+                          "id = 'edit_comp_img" +
+                               "'" +
+                          "src = '" + comp_.img +
+                                "'" +
+                   "/>";
+
             return r;
         }
 
@@ -70,16 +102,22 @@ namespace mvc.Controllers
 
                 r += "<div " +
                            "class = 'l'" +
+                           "onclick = 'get_comp(" + c.ID +
+                                              ")" +
+                                     "'" +
                      ">";
-
+                r += "<img class = 'comp_img" +
+                                   "'" +
+                           "id = 'comp_img_" + c.ID +
+                                "'" +
+                            "src = '" + c.img +
+                                  "'" +
+                     "/>";
                 r += c.name;
-
                 r += "</div>";
-
                 r += "<div " +
                            "class = 'cls'" +
                      ">";
-
                 r += "</div>";
 
                 r += "<div " +
@@ -118,6 +156,7 @@ namespace mvc.Controllers
                                     int comp, int c_serv
                                    )
         {
+            string img = Properties.Resources.ht_create_sub_comp_img;
             string r = "";
 
             r += get_record("Name", ni, "create_sub_comp_name();", "create_sub_comp_name"
@@ -126,7 +165,8 @@ namespace mvc.Controllers
             r += get_record("Type", ni, "create_sub_comp_type();", "create_sub_comp_type"
                             );
 
-            r += get_record("Image", ni, "create_sub_comp_image();", "create_sub_comp_image"
+            r += get_record("Image", img,
+                "create_sub_comp_img();", "create_sub_comp_img"
                             );
 
             r += "<br><br>";
@@ -154,9 +194,30 @@ namespace mvc.Controllers
         }
 
         public string create_sub_comp2(
-                                    string name, int type, int super_comp, int c_serv
+                                    string name, int type, int super_comp, string img,
+                                    int c_serv
                                    )
         {
+            string r = "";
+
+            name = name.Trim();
+
+            if (name == ""
+                )
+                r += "You must provide the <i>name</i> for this component" + "<br>";
+
+            if (type == 0
+                )
+                r += "<i>Type</i> is required for this component" + "<br>";
+            if (img == ""
+                )
+                r += "<i>Image</i> is required for this component" + "<br>";
+
+            if (!r.Equals("")
+                )
+                //2 = error
+                return "2" + s240 + r;
+
             component_p comp = new component_p();
 
             comp.name = name;
@@ -165,11 +226,13 @@ namespace mvc.Controllers
 
             comp.super_comp = super_comp;
 
+            comp.img = img;
+
             comp.submit();
 
-            return "";
+            return "0" + s240 + super_comp.ToString();
         }
-
+ 
         public string create_sub_comp_name(int c_serv
                                           )
         {
@@ -215,6 +278,16 @@ namespace mvc.Controllers
             }
 
             string topic = "Choose the type";
+
+            return r + s240 + topic;
+        }
+
+        public string create_sub_comp_img(int c_serv
+                                          )
+        {
+            string r = Properties.Resources.ht_fi;
+
+            string topic = "Choose the Image [.png, .bmp, .jpg]";
 
             return r + s240 + topic;
         }
