@@ -122,7 +122,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="imgs\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +159,9 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="business\components_p.cs" />
     <Compile Include="business\component_p.cs" />
+    <Compile Include="business\imgs.cs" />
+    <Compile Include="business\img_stg_p.cs" />
+    <Compile Include="business\img_stgs_p.cs" />
     <Compile Include="business\sql_code.cs" />
     <Compile Include="business\type_.cs" />
     <Compile Include="business\type_s.cs" />

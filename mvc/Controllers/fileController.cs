@@ -3,8 +3,11 @@ using System.IO;
 using System.Web.Http;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Diagnostics;
+
+using mvc.business;
 
 namespace mvc.Controllers
 {
@@ -30,8 +33,7 @@ namespace mvc.Controllers
                 folder.Create();
 
             System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
-            string crypt = "";
-
+            byte[] img = new byte[] { };
             for (int i = 0; i <= hfc.Count - 1; i++)
             {
                 System.Web.HttpPostedFile hpf = hfc[i];
@@ -53,60 +55,29 @@ namespace mvc.Controllers
 
                     string store_to = cur + "." + ext;
 
-                    for (; File.Exists(store_to);
-                        )
-                    {
-                        Thread.Sleep(2);
-                        cur = DateTime.Now.Ticks.ToString();
-                    }
+                    int ii = hpf.ContentLength;
+                    img = new byte[ii];
+                    hpf.InputStream.Read(img, 0, ii
+                                        );
 
-                    hpf.SaveAs(sPath + store_to
-                              );
+                    img_stg_p r = new business.img_stg_p();
+
+                    r.ID = cur;
+
+                    r.img = img;
+
+                    r.format = ext;
+
+                    r.submit();
 
                     cnt++;
-
-                    string from = sPath + store_to;
-
-                    string to = from.Replace(ext, "txt"
-                                            );
-
-                    Process proc = new Process();
-
-                    proc.StartInfo.UseShellExecute = true;
-
-                    proc.StartInfo.CreateNoWindow = true;
-
-                    proc.StartInfo.FileName = "certutil";
-
-                    proc.StartInfo.Arguments = " -encode " + "\"" + from +
-                                                             "\" \"" + to +
-                                                                 "\"";
-                    proc.Start();
-
-                    proc.WaitForExit();
-
-                    List<string> srs = new List<string>();
-
-                    StreamReader sr = new StreamReader(to);
-
-                    for (; sr.Peek() > -1;
-                        )
-                    {
-                        srs.Add(sr.ReadLine()
-                                );
-                    }
-
-                    for (int ii = 1; ii < srs.Count - 1; ii++
-                        )
-                    {
-                        crypt += srs[ii];
-                    }
                 }
             }
-            
+
             if (cnt > 0)
             {
-                return "0" + s240 + crypt + s240 + ext;
+                return "0" + s240 + cur + s240 + ext + s240 + imgs.byte_to_base64(img, ext
+                                                                                 );
             }
             else
             {

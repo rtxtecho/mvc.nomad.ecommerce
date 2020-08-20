@@ -131,6 +131,27 @@
      id="create_sub_comp_img_content"
 /&gt;</value>
   </data>
+  <data name="ht_edit_comp" xml:space="preserve">
+    <value>&lt;u&gt;Component&lt;/u&gt;&lt;br&gt;&lt;br&gt;
+&lt;div 
+     class="edit_comp_img"
+&gt;
+    &lt;img 
+          class = 'edit_comp_img_
+          id = 'edit_comp_img'
+          src = '//src//'          
+    /&gt;
+&lt;/div&gt;
+&lt;div 
+     class="edit_comp_content"
+&gt;
+    //content//
+&lt;/div&gt;
+&lt;div 
+     class="cls"
+&gt;
+&lt;/div&gt;</value>
+  </data>
   <data name="ht_fi" xml:space="preserve">
     <value>&lt;form id="file_form"
       action=""&gt;

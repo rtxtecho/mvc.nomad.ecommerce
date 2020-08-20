@@ -1,4 +1,8 @@
-﻿var s240 = String.fromCharCode(240);
+﻿$(document).ajaxError(function (event, request, settings) {
+    $("#msg").append("<li>Error requesting page " + settings.url + "</li>");
+});
+
+var s240 = String.fromCharCode(240);
 var ni = "<i>Not Identified</i>"
 
 c_serv = 0;
@@ -187,8 +191,8 @@ function create_sub_comp2(
     if (type == undefined
         )
         type = 0;
-    var img = $( "#create_sub_comp_img_content"
-               ).attr("src");
+    var img = $( "#create_sub_comp_img"
+               ).attr("cur");
     if (img == undefined
         )
         img = "";
@@ -200,7 +204,7 @@ function create_sub_comp2(
              super_comp: comp,
              name: name,
              type: type,
-             img: img,
+             img_stg: img,
              c_serv: c_serv
          },
     function (r) {
@@ -241,7 +245,7 @@ function create_sub_comp_name2() {
     progress_go();
     c_serv++;
 
-    var cur = $("#t_bo_create_sub_comp_name"
+    var cur = $("#t_bo_edit_comp_name"
                 ).val();
     sub_scrn2_stop();
     cur = cur.trim();
@@ -257,6 +261,51 @@ function create_sub_comp_name2() {
      ).html(cur);
 
     progress_stop();
+}
+
+function edit_comp_name(comp) {
+    progress_go();
+    c_serv++;
+    var url = "/Home/edit_comp_name";
+    $.get(url,
+         {
+             comp: comp,
+             c_serv: c_serv
+         },
+    function (r) {
+
+        progress_stop();
+
+        r = r.split(s240);
+
+        sub_scrn_go(r[0], r[1]
+                   );
+    });
+}
+
+function edit_comp_name2(comp) {
+    progress_go();
+    c_serv++;
+    var cur = $("#t_bo_edit_comp_name"
+                ).val();
+    var url = "/Home/edit_comp_name2";
+    $.get(url,
+         {
+             cur: cur,
+             comp: comp,
+             c_serv: c_serv
+         },
+    function (r) {
+        progress_stop();
+        sub_scrn_stop();
+        r = r.split(s240);
+        $("#edit_comp_name_"
+            ).html(r[1]
+                  );
+        $("#comp_name" + "_" + r[0]
+                    ).html(r[1]
+                          );
+    });
 }
 
 function create_sub_comp_type() {
@@ -323,7 +372,7 @@ function create_sub_comp_img2(r) {
     r = r.split(s240);
     progress_go();
     c_serv++;
-    var src = "data:image/" + r[2] + ";base64," + r[1];
+    var src = r[3];
     $("#create_sub_comp_img_ni"
      ).css("display", "none"
            );

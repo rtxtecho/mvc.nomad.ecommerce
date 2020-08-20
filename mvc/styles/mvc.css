@@ -122,4 +122,24 @@
     border-left: solid 1px rgb(177, 177, 177);
     float: left;
 }
-    
+
+.edit_comp_img_ 
+{
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.edit_comp_img
+{
+    padding-right: 17px;
+    border-right: solid 1px rgb(177, 177, 177);
+    float: left;
+}
+
+.edit_comp_content
+{
+    margin-left: -1px;
+    padding-left: 17px;
+    border-left: solid 1px rgb(177, 177, 177);
+    float: left;
+} 

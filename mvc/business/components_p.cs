@@ -21,10 +21,13 @@ namespace mvc.business
 
             comp.super_comp = sql_code.get_i(SDR, "super_comp"
                                              );
-            comp.img = sql_code.get_s(SDR, "img"
+            comp.img = sql_code.get_byte(SDR, "img"
                                             );
+            comp.format = sql_code.get_s(SDR, "format"
+                                        );
+
             return comp;
-        }
+        }                        
 
         public static component_p get(int ID
                                       )

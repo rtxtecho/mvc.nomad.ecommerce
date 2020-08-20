@@ -81,6 +81,33 @@ namespace mvc.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;u&gt;Component&lt;/u&gt;&lt;br&gt;&lt;br&gt;
+        ///&lt;div 
+        ///     class=&quot;edit_comp_img&quot;
+        ///&gt;
+        ///    &lt;img 
+        ///          class = &apos;edit_comp_img_
+        ///          id = &apos;edit_comp_img&apos;
+        ///          src = &apos;//src//&apos;          
+        ///    /&gt;
+        ///&lt;/div&gt;
+        ///&lt;div 
+        ///     class=&quot;edit_comp_content&quot;
+        ///&gt;
+        ///    //content//
+        ///&lt;/div&gt;
+        ///&lt;div 
+        ///     class=&quot;cls&quot;
+        ///&gt;
+        ///&lt;/div&gt;.
+        /// </summary>
+        internal static string ht_edit_comp {
+            get {
+                return ResourceManager.GetString("ht_edit_comp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;form id=&quot;file_form&quot;
         ///      action=&quot;&quot;&gt;
         ///    Choose Your Files:

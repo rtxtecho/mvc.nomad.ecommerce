@@ -40,6 +40,22 @@ namespace mvc.business
             }
         }
 
+        public static byte[] get_byte
+            (SqlDataReader SDR, string column
+            )
+        {
+            try
+            {
+                byte[] content = (byte[])SDR[column];
+
+                return content;
+            }
+            catch
+            {
+                return new byte[] { };
+            }
+        }
+
         public static string
                     get_s(SqlDataReader SDR, string column
                          )
@@ -103,14 +119,7 @@ namespace mvc.business
 
             cnt.CommandText = query;
 
-            foreach (prm_p prm in prms.curs
-                    )
-            {
-                cnt.Parameters.Add("@" + prm.pseudo, prm.type
-                                   );
-
-                cnt.Parameters["@" + prm.pseudo].Value = prm.content;
-            }
+            prms.decompile(ref cnt);
 
             cnt.ExecuteNonQuery();
 
@@ -169,30 +178,59 @@ namespace mvc.business
         public
         string pseudo = "";
         public
-        string content;
+        object content;
         public
         SqlDbType type;
     }
 
-    public class prms_p
-    {
-        public
-        List<prm_p>
-            curs = new List<prm_p>();
-
-        public void enroll(string pseudo, string content, SqlDbType type
-                          )
+        public class prms_p
         {
-            prm_p prm = new prm_p();
+            public
+            List<prm_p>
+                curs = new List<prm_p>();
 
-            prm.pseudo = pseudo;
+            public void enroll(string pseudo, string content, SqlDbType type
+                              )
+            {
+                prm_p prm = new prm_p();
 
-            prm.content = content;
+                prm.pseudo = pseudo;
 
-            prm.type = type;
+                prm.content = content;
 
-            curs.Add(prm);
+                prm.type = type;
+
+                curs.Add(prm);
+            }
+
+            public void enroll(string pseudo, byte[] content, SqlDbType type
+                                 )
+            {
+                prm_p prm = new prm_p();
+
+                prm.pseudo = pseudo;
+
+                prm.content = content;
+
+                prm.type = type;
+
+                curs.Add(prm);
+            }
+
+            public void decompile(ref SqlCommand cmd
+                                  )
+            {
+                foreach (prm_p prm in curs
+                    )
+                {
+                    cmd.Parameters.Add("@" + prm.pseudo, prm.type
+                                       );
+
+                    cmd.Parameters["@" + prm.pseudo].Value = prm.content;
+                }
+            }
+        }
         }
     }
-        }
-    }
+
+            

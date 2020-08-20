@@ -1,9 +1,11 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.Mvc;
 using mvc.business;
+using System.Drawing;
 
 namespace mvc.Controllers
 {
@@ -45,7 +47,7 @@ namespace mvc.Controllers
             string type = type_s.get(comp_.comp_type
                                     ).type;
 
-            string r = "<u>Component</u><br><br>";
+            string r = "";
 
             r += get_record("Name", comp_.name, "edit_comp_name(" + comp +
                                                                   ");", "edit_comp_name"
@@ -54,17 +56,12 @@ namespace mvc.Controllers
             r += get_record("Type", type, "edit_comp_type(" + comp +
                                                                  ");", "edit_comp_type"
                           );
-
-            r += "<img " +
-                          "class = 'edit_comp_img" +
-                                  "'" +
-                          "id = 'edit_comp_img" +
-                               "'" +
-                          "src = '" + comp_.img +
-                                "'" +
-                   "/>";
-
-            return r;
+            string resu = Properties.Resources.ht_edit_comp.Replace("//content//", r
+                                                                   )
+                                                           .Replace("//src//", imgs.byte_to_base64(comp_.img, comp_.format
+                                                                                              )
+                                                                   );
+            return resu;
         }
 
         public string get_sub_comps(
@@ -106,15 +103,35 @@ namespace mvc.Controllers
                                               ")" +
                                      "'" +
                      ">";
+                r += "<div " +
+                           "class = 'l'" +
+                       ">";
                 r += "<img class = 'comp_img" +
                                    "'" +
                            "id = 'comp_img_" + c.ID +
                                 "'" +
-                            "src = '" + c.img +
-                                  "'" +
+                            "src = '" + imgs.byte_to_base64(c.img, c.format
+                                                           ) +
+                                   "'" +
                      "/>";
-                r += c.name;
+
                 r += "</div>";
+                r += "<div " +
+                           "class = 'l'" +
+                           " id='comp_name_" + c.ID +
+                               "'" +
+                      ">";
+                r += c.name;
+
+                r += "</div>";
+
+                r += "<div " +
+                           "class = 'cls'" +
+                     ">";
+                r += "</div>";
+
+                r += "</div>";
+
                 r += "<div " +
                            "class = 'cls'" +
                      ">";
@@ -194,7 +211,7 @@ namespace mvc.Controllers
         }
 
         public string create_sub_comp2(
-                                    string name, int type, int super_comp, string img,
+                                    string name, int type, int super_comp, string img_stg,
                                     int c_serv
                                    )
         {
@@ -209,15 +226,21 @@ namespace mvc.Controllers
             if (type == 0
                 )
                 r += "<i>Type</i> is required for this component" + "<br>";
-            if (img == ""
+            if (img_stg == ""
                 )
                 r += "<i>Image</i> is required for this component" + "<br>";
+
+            img_stg_p ims = img_stgs_p.get(img_stg
+                                          );
+            if (ims == null
+                )
+                r += "Could not locate the image" + "<br>";
 
             if (!r.Equals("")
                 )
                 //2 = error
                 return "2" + s240 + r;
-
+            ims.purge();
             component_p comp = new component_p();
 
             comp.name = name;
@@ -226,27 +249,61 @@ namespace mvc.Controllers
 
             comp.super_comp = super_comp;
 
-            comp.img = img;
-
+            comp.img = ims.img;
+            comp.format = ims.format;
             comp.submit();
 
             return "0" + s240 + super_comp.ToString();
         }
- 
+
         public string create_sub_comp_name(int c_serv
                                           )
         {
+            string method = "create_sub_comp_name2();";
+
+            return edit_comp_name_generic("", method
+                                          );
+        }
+
+
+        public string edit_comp_name(int comp, int c_serv
+                                            )
+        {
+            component_p comp_ = components_p.get(comp);
+
+            string cur = comp_.name;
+
+            string method = "edit_comp_name2(" + comp +
+                                            ");";
+
+            return edit_comp_name_generic(cur, method
+                                           );
+        }
+        public string edit_comp_name2(int comp, string cur, int c_serv
+                                      )
+        {
+            component_p comp_ = components_p.get(comp);
+            comp_.revise("name", cur
+                           );
+
+            return comp + s240 + cur;
+        }
+
+        public string edit_comp_name_generic(string cur, string method
+                                            )
+        {
+
             int c = sql_code.get_c_count("component", "name"
                                         );
 
             string r = "<br>";
 
-            r += get_t_bo("t_bo_create_sub_comp_name", "", c
+            r += get_t_bo("t_bo_edit_comp_name", cur, c
                          );
 
             r += "<br><br>";
 
-            r += get_record("Store", "Store this name", "create_sub_comp_name2();", ""
+            r += get_record("Store", "Store this name", method, ""
                            );
 
             string topic = "Component Name";
