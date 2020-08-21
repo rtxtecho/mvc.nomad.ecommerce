@@ -82,28 +82,34 @@ namespace mvc.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;u&gt;Component&lt;/u&gt;&lt;br&gt;&lt;br&gt;
-        ///&lt;div 
-        ///     class=&quot;edit_comp_img&quot;
-        ///&gt;
-        ///    &lt;img 
-        ///          class = &apos;edit_comp_img_
+        ///&lt;div class=&quot;edit_comp_img&quot;&gt;
+        ///    &lt;img class=&apos;edit_comp_img_&apos;
         ///          id = &apos;edit_comp_img&apos;
-        ///          src = &apos;//src//&apos;          
-        ///    /&gt;
+        ///         src=&apos;//src//&apos; /&gt;
+        ///    //edit img//
         ///&lt;/div&gt;
-        ///&lt;div 
-        ///     class=&quot;edit_comp_content&quot;
-        ///&gt;
+        ///&lt;div class=&quot;edit_comp_content&quot;&gt;
         ///    //content//
         ///&lt;/div&gt;
-        ///&lt;div 
-        ///     class=&quot;cls&quot;
-        ///&gt;
+        ///&lt;div class=&quot;cls&quot;&gt;
         ///&lt;/div&gt;.
         /// </summary>
         internal static string ht_edit_comp {
             get {
                 return ResourceManager.GetString("ht_edit_comp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;div class=&quot;edit_comp_img_choose&quot;
+        ///     onclick=&quot;edit_comp_img(//comp//);&quot;
+        ///&gt;
+        ///    Edit Image
+        ///&lt;/div&gt;.
+        /// </summary>
+        internal static string ht_edit_img_choose {
+            get {
+                return ResourceManager.GetString("ht_edit_img_choose", resourceCulture);
             }
         }
         
@@ -122,12 +128,11 @@ namespace mvc.Properties {
         ///            var data =
         ///                new FormData($(&quot;form&quot;)[0]);
         ///
-        ///            alert(data);
-        ///
         ///            $.ajax({
         ///                type: &quot;POST&quot;,
         ///                url: &quot;/api/file/&quot;,
-        ///                enctype: &apos;multipa [rest of string was truncated]&quot;;.
+        ///                enctype: &apos;multipart/form-data&apos;,
+        ///             [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ht_fi {
             get {

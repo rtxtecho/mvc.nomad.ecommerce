@@ -133,23 +133,23 @@
   </data>
   <data name="ht_edit_comp" xml:space="preserve">
     <value>&lt;u&gt;Component&lt;/u&gt;&lt;br&gt;&lt;br&gt;
-&lt;div 
-     class="edit_comp_img"
-&gt;
-    &lt;img 
-          class = 'edit_comp_img_
+&lt;div class="edit_comp_img"&gt;
+    &lt;img class='edit_comp_img_'
           id = 'edit_comp_img'
-          src = '//src//'          
-    /&gt;
+         src='//src//' /&gt;
+    //edit img//
 &lt;/div&gt;
-&lt;div 
-     class="edit_comp_content"
-&gt;
+&lt;div class="edit_comp_content"&gt;
     //content//
 &lt;/div&gt;
-&lt;div 
-     class="cls"
+&lt;div class="cls"&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="ht_edit_img_choose" xml:space="preserve">
+    <value>&lt;div class="edit_comp_img_choose"
+     onclick="edit_comp_img(//comp//);"
 &gt;
+    Edit Image
 &lt;/div&gt;</value>
   </data>
   <data name="ht_fi" xml:space="preserve">
@@ -167,8 +167,6 @@
             var data =
                 new FormData($("form")[0]);
 
-            alert(data);
-
             $.ajax({
                 type: "POST",
                 url: "/api/file/",
@@ -178,7 +176,7 @@
                 cache: false,
                 data: data,
                 success: function (data, textStatus, xhr) {
-                    create_sub_comp_img2(data);
+                    //method//(data//prms//);
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     alert(textStatus + ': ' + errorThrown);

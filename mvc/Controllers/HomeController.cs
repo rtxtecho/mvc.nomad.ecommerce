@@ -56,11 +56,16 @@ namespace mvc.Controllers
             r += get_record("Type", type, "edit_comp_type(" + comp +
                                                                  ");", "edit_comp_type"
                           );
+            string edit_img = Properties.Resources.ht_edit_img_choose.Replace("//comp//", comp.ToString()
+                                                                           );
             string resu = Properties.Resources.ht_edit_comp.Replace("//content//", r
                                                                    )
                                                            .Replace("//src//", imgs.byte_to_base64(comp_.img, comp_.format
                                                                                               )
+                                                                   )
+                                                           .Replace("//edit img//", edit_img
                                                                    );
+
             return resu;
         }
 
@@ -374,17 +379,66 @@ namespace mvc.Controllers
             string topic = "Choose the type";
 
             return r + s240 + topic;
-        }        
+        }
 
         public string create_sub_comp_img(int c_serv
                                           )
         {
-            string r = Properties.Resources.ht_fi;
+            string r = Properties.Resources.ht_fi.Replace("//method//", "create_sub_comp_img2"
+                                                         )
+                                                  .Replace("//prms//", ""
+                                                        );
+            string topic = "Choose the Image [.png, .bmp, .jpg]";
+
+            return r + s240 + topic;
+        }
+
+        public string edit_comp_img(int comp, int c_serv
+                                          )
+        {
+            string r = Properties.Resources.ht_fi.Replace("//method//", "edit_comp_img2"
+                                                         )
+                                                 .Replace("//prms//", ", " + comp
+                                                          );
 
             string topic = "Choose the Image [.png, .bmp, .jpg]";
 
             return r + s240 + topic;
         }
+
+        public string edit_comp_img2(
+                                   string img_stg,
+                                   int comp,
+                                   int c_serv
+                                    )
+
+        {
+            img_stg_p ims = img_stgs_p.get(img_stg
+                                             );
+            string r = "";
+            if (ims == null
+                )
+                r += "Could not locate the image" + "<br>";
+
+            if (!r.Equals("")
+                )
+                //2 = error
+                return "2" + s240 + r;
+            ims.purge();
+
+            component_p c = components_p.get(comp
+                                             );
+
+            c.revise("img", ims.img
+                     );
+
+            c.revise("format", ims.format
+                     );
+
+            return "0" + s240 + comp + s240 + imgs.byte_to_base64(ims.img, ims.format
+                                                               );
+        }
         }
     }
-        
+                                                           
+   

@@ -68,5 +68,12 @@ namespace mvc.business
             sql_code.revise("component", column, content, ID
                             );
         }
+
+        public void revise(string column, byte[] content
+                          )
+        {
+            sql_code.revise("component", column, content, ID
+                            );
+        }
         }
     }

@@ -433,3 +433,55 @@ function create_sub_comp_img2(r) {
     progress_stop();
 
 }
+
+function edit_comp_img(comp) {
+    progress_go();
+    c_serv++;
+    var url = "/Home/edit_comp_img";
+    $.get(url,
+         {
+             comp: comp,
+             c_serv: c_serv
+         },
+    function (r) {
+
+        progress_stop();
+
+        r = r.split(s240);
+
+        sub_scrn_go(r[0], r[1]
+                   );
+    });
+}
+
+function edit_comp_img2(r, comp
+                        )
+{
+    sub_scrn_stop();
+    r = r.split(s240);
+    progress_go();
+    c_serv++;
+    var url = "/Home/edit_comp_img2";
+    $.get(url,
+         {
+             img_stg: r[1],
+             comp: comp,
+             c_serv: c_serv
+         },
+    function (r) {
+        progress_stop();
+
+        r = r.split(s240);
+        if (r[0] == 0
+            )
+        {
+        $("#edit_comp_img"
+         ).attr("src", r[2]
+               );
+            
+        $("#comp_img_" + r[1]
+         ).attr("src", r[2]
+               );
+        }
+    });
+}

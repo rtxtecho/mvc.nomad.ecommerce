@@ -171,6 +171,20 @@ namespace mvc.business
             return c;
         }
 
+        public static void revise(string tb, string column, byte[] content, int ID
+                                  )
+        {
+            string query = "update " + tb + " " +
+                                     "set " + column + " = @content" +
+                                          " where ID = " + ID;
+
+            sql_code.prms_p prms = new prms_p();
+            prms.enroll("content", content, SqlDbType.Binary
+                       );
+            run_non_query(query, prms
+                         );
+        }
+
         public static void revise(string tb, string column, string content, int ID
                                   )
         {
