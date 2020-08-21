@@ -145,6 +145,40 @@
 &lt;div class="cls"&gt;
 &lt;/div&gt;</value>
   </data>
+  <data name="ht_edit_comps" xml:space="preserve">
+    <value>&lt;div class="tree"
+     id="tree"&gt;
+    &lt;div class="tree_topic"&gt;
+        &lt;div class="l"&gt;
+            Components
+        &lt;/div&gt;
+
+        &lt;div class="create_comp"
+             onclick="create_sub_comp(0);"&gt;
+            &lt;img src="../imgs/get.png"
+                 class="create_comp_img" /&gt;
+            New
+        &lt;/div&gt;
+        &lt;div class="cls"&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="sub_comps_0"
+         id="sub_comps_0"&gt;
+    &lt;/div&gt;
+    &lt;div class="pgt"
+         id="pgt"
+         cur="1"
+         mx="0"
+    &gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="comp_content"
+     id="comp_content"&gt;
+&lt;/div&gt;
+&lt;div class="cls"&gt;
+&lt;/div&gt;</value>
+  </data>
   <data name="ht_edit_img_choose" xml:space="preserve">
     <value>&lt;div class="edit_comp_img_choose"
      onclick="edit_comp_img(//comp//);"
@@ -185,6 +219,43 @@
         });
     });
 &lt;/script&gt;</value>
+  </data>
+  <data name="ht_pgt" xml:space="preserve">
+    <value>&lt;div class="l"&gt;
+
+    &lt;img id="pgt_prev"
+         onclick="pgt_prev();"
+         style="cursor: pointer;
+                 margin-right: 7px;"
+         src="../imgs/scroll_prev.png"
+         title="Previous Page" /&gt;
+
+    &lt;img id="pgt_next"
+         onclick="pgt_next();"
+         style="cursor: pointer;
+                 margin-right: 7px;"
+         src="../imgs/scroll_next.png"
+         title="Next Page" /&gt;
+&lt;/div&gt;
+&lt;div class="l"
+     id="pgt_choose" ;
+     onclick="pgt_choose();"
+     title="Choose Page"&gt;
+    &lt;div class="l"&gt;
+        Page:
+    &lt;/div&gt;
+
+    &lt;div class="l"
+        id="pgt_cur"
+    &gt;
+        1
+    &lt;/div&gt;
+    &lt;div class="cls"
+     &gt;        
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cls"&gt;
+&lt;/div&gt;</value>
   </data>
   <data name="ht_rec" xml:space="preserve">
     <value>&lt;div 

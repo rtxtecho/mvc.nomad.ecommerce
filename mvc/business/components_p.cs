@@ -87,7 +87,7 @@ namespace mvc.business
         {
             string r = "select * from component where super_comp = " + comp;
 
-            r += " order by upper(name)";
+            r += " order by upper(name), ID";
 
             SqlConnection conn = null;
 

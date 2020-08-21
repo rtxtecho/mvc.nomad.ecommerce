@@ -75,5 +75,14 @@ namespace mvc.business
             sql_code.revise("component", column, content, ID
                             );
         }
+
+        public void purge()
+        {
+            string r = "delete from component " +
+                                                    " where " +
+                              "ID = " + ID;
+
+            sql_code.run_non_query(r);
+        }
         }
     }

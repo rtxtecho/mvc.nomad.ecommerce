@@ -11,6 +11,21 @@ namespace mvc.Controllers
 {
     public class HomeController : Controller
     {
+        static
+        SortedList<string,
+        SortedList<int,
+                  List<component_p
+                      >
+                  >
+                  >
+            comps_pgt = new
+            SortedList<string,
+        SortedList<int,
+                  List<component_p
+                      >
+                  >
+                  >();
+
         public string s240 = "" + (char)240;
         public string ni = "<i>Not Identified</i>";
 
@@ -35,6 +50,12 @@ namespace mvc.Controllers
                                                    .Replace("//id//", id
                                                            );
             return r;
+        }
+        public string edit_comps(int c_serv
+                                 )
+        {
+            string client = DateTime.Now.Ticks.ToString();
+            return Properties.Resources.ht_edit_comps + s240 + client;
         }
 
         public string get_comp(
@@ -70,10 +91,62 @@ namespace mvc.Controllers
         }
 
         public string get_sub_comps(
-                                    int comp, int c_serv
+                                    int comp, int pgt_cur, string client,
+                                    int c_serv
                                    )
         {
-            List<component_p> comps = components_p.get_sub_comps(comp);
+            List<component_p
+                > comps = null;
+            string pgt = "";
+            string mx = "";
+            if (comp == 0
+                )
+            {
+                if (!comps_pgt.ContainsKey(client
+                                         )
+                    )
+                { List<component_p
+                      >
+                  compss = components_p.get_sub_comps(0);
+
+                    int i = 17;
+                    int cur_i = 0;
+                    comps_pgt.Add(client, new SortedList<int, List<component_p
+                                                                   >
+                                                         >()
+                                  );
+                    foreach (component_p c in compss
+                              )
+                    {
+                        i++;
+
+                        if (17 < i
+                            )
+                        {
+                            i = 1;
+
+                            cur_i++;
+
+                            comps_pgt[client].Add(cur_i, new List<component_p
+                                                          >()
+                                                 );
+                        }
+                        comps_pgt[client][cur_i].Add(c);
+                    }
+                    pgt = Properties.Resources.ht_pgt;
+
+                    mx = comps_pgt[client]
+                      .Count.ToString();
+                }
+                if (comps_pgt[client].Count > 0
+                    )
+                    comps_pgt[client].Add(1, new List<business.component_p
+                                                      >()
+                                         );
+                comps = comps_pgt[client][pgt_cur];
+            }
+            else
+                comps = components_p.get_sub_comps(comp);
 
             string r = "";
 
@@ -87,18 +160,50 @@ namespace mvc.Controllers
                                      "'" +
                      ">";
 
-                r += "+";
+                r += "<img class = 'get_comp_img" +
+                                  "'" +
+                   "src='" + "../imgs/get_subs.png" +
+                              "'" +
+                      " id = 'get_comp_img_" + c.ID +
+                            "'" +
+                            " xpnd = '0'" +
+                      "/>";
 
                 r += "</div>";
 
                 r += "<div " +
+                            "class = 'comp'" +
+                           "id = 'comp_" + c.ID +
+                                "'" +
+                      ">";
+
+                r += "<div " +
                            "class = 'get_sub' " +
+                           "title = 'Create Sub Component" +
+                                   "' " +
                            "onclick = 'create_sub_comp(" + c.ID +
                                                       ");" +
                                      "'" +
                      ">";
 
-                r += "*";
+                r += "<img src='" + "../imgs/create_sub.png" +
+                              "'" +
+                      "/>";
+
+                r += "</div>";
+
+                r += "<div " +
+                           "class = 'get_sub' " +
+                           "title='Delete Component" +
+                                  "' " +
+                           "onclick = 'purge_comp(" + c.ID +
+                                                      ");" +
+                                     "'" +
+                     ">";
+
+                r += "<img src='../imgs/reject.png" +
+                              "'" +
+                      "/>";
 
                 r += "</div>";
 
@@ -142,6 +247,13 @@ namespace mvc.Controllers
                      ">";
                 r += "</div>";
 
+                r += "</div>";
+
+                r += "<div " +
+                           "class = 'cls'" +
+                     ">";
+                r += "</div>";
+
                 r += "<div " +
                             "class = 'sub_comps" +
                                     "'" + " " +
@@ -151,7 +263,12 @@ namespace mvc.Controllers
 
                 r += "</div>";
             }
-            return r + s240 + comp;
+            if (r == ""
+                )
+                r = "<i>" + "No Sub Components" +
+                      "</i>";
+
+            return r + s240 + comp + s240 + pgt + s240 + mx;
         }
 
         public string get_t_bo(
@@ -172,6 +289,110 @@ namespace mvc.Controllers
                                                            );
 
             return r;
+        }
+        public string purge_comp(int comp, string client,
+                                  int c_serv
+                                )
+        {
+            int sub_comps = components_p.get_sub_comps(comp).Count;
+
+            if (sub_comps == 0
+                )
+            {
+                component_p c = components_p.get(comp);
+
+                c.purge();
+                purge_comp_from_pgt(c, client
+                                   );
+                return "0" + s240 + c.super_comp;
+            }
+
+            string r = "There are sub components associated to this." + "<br>" + "<br>";
+
+            r += get_record("Purge sub components", "Purge this & each sub component",
+                            "purge_comp_subs(" + comp +
+                            ");", ""
+                            );
+            r += get_record("Promote sub components", "Purge this, but promote each sub component",
+                              "purge_comp_promote(" + comp +
+                                                ");", ""
+                            );
+
+            string topic = "Sub Components";
+
+            return "2" + s240 + r + s240 + topic;
+        }
+
+        public string purge_comp_subs(int comp, string client,
+                                  int c_serv
+                                    )
+        {
+            component_p c = components_p.get(comp);
+
+            purge_comp_subs_recurs(c);
+
+            return c.super_comp.ToString();
+        }
+
+        public void purge_comp_subs_recurs(component_p comp
+                                          )
+        {
+            comp.purge();
+
+            List<component_p
+                > subs = components_p.get_sub_comps(comp.ID
+                                                    );
+
+            foreach (component_p r in subs
+                    )
+            {
+                purge_comp_subs_recurs(r);
+            }
+        }
+        public string purge_comp_promote(int comp, string client,
+                                  int c_serv
+                                           )
+        {
+            component_p c = components_p.get(comp);
+            c.purge();
+
+            List<component_p
+                > subs = components_p.get_sub_comps(comp);
+
+            foreach (component_p r in subs
+                    )
+            {
+                r.revise("super_comp", c.super_comp
+                       );
+            }
+
+            return c.super_comp.ToString();
+        }
+
+        public void purge_comp_from_pgt(component_p comp, string client
+                                         )
+        {
+            if (comp.super_comp > 0
+                )
+                return;
+
+            foreach (int i in comps_pgt[client].Keys
+                    )
+            {
+                component_p c = comps_pgt[client][i].Find(p => p.ID == comp.ID
+                                                             );
+
+                if (c == null
+                    )
+                {
+                }
+                else
+                {
+                    comps_pgt[client][i].Remove(c);
+
+                    break;
+                }
+            }
         }
 
         public string create_sub_comp(
@@ -216,7 +437,7 @@ namespace mvc.Controllers
         }
 
         public string create_sub_comp2(
-                                    string name, int type, int super_comp, string img_stg,
+                                    string name, int type, int super_comp, string img_stg, string client,
                                     int c_serv
                                    )
         {
@@ -245,10 +466,16 @@ namespace mvc.Controllers
                 )
                 //2 = error
                 return "2" + s240 + r;
+
             ims.purge();
+            string cur = DateTime.Now.Ticks.ToString();
+
             component_p comp = new component_p();
 
             comp.name = name;
+            if (super_comp == 0
+                )
+                comp.name = cur;
 
             comp.comp_type = type;
 
@@ -258,7 +485,20 @@ namespace mvc.Controllers
             comp.format = ims.format;
             comp.submit();
 
-            return "0" + s240 + super_comp.ToString();
+            if (super_comp == 0
+                )
+            {
+                comp = components_p.get(cur);
+
+                comp.revise("name", name
+                           );
+
+                int i = comps_pgt.Count;
+                comps_pgt[client][i].Add(comp
+                                          );
+
+            }
+            return "0" + s240 + super_comp;
         }
 
         public string create_sub_comp_name(int c_serv
@@ -440,5 +680,3 @@ namespace mvc.Controllers
         }
         }
     }
-                                                           
-   

@@ -101,6 +101,36 @@ namespace mvc.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;div class=&quot;tree&quot;
+        ///     id=&quot;tree&quot;&gt;
+        ///    &lt;div class=&quot;tree_topic&quot;&gt;
+        ///        &lt;div class=&quot;l&quot;&gt;
+        ///            Components
+        ///        &lt;/div&gt;
+        ///
+        ///        &lt;div class=&quot;create_comp&quot;
+        ///             onclick=&quot;create_sub_comp(0);&quot;&gt;
+        ///            &lt;img src=&quot;../imgs/get.png&quot;
+        ///                 class=&quot;create_comp_img&quot; /&gt;
+        ///            New
+        ///        &lt;/div&gt;
+        ///        &lt;div class=&quot;cls&quot;&gt;
+        ///        &lt;/div&gt;
+        ///    &lt;/div&gt;
+        ///    &lt;div class=&quot;sub_comps_0&quot;
+        ///         id=&quot;sub_comps_0&quot;&gt;
+        ///    &lt;/div&gt;
+        ///    &lt;div class=&quot;pgt&quot;
+        ///         id=&quot;pgt&quot;
+        ///         cur=&quot;1&quot; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ht_edit_comps {
+            get {
+                return ResourceManager.GetString("ht_edit_comps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;div class=&quot;edit_comp_img_choose&quot;
         ///     onclick=&quot;edit_comp_img(//comp//);&quot;
         ///&gt;
@@ -137,6 +167,34 @@ namespace mvc.Properties {
         internal static string ht_fi {
             get {
                 return ResourceManager.GetString("ht_fi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;div class=&quot;l&quot;&gt;
+        ///
+        ///    &lt;img id=&quot;pgt_prev&quot;
+        ///         onclick=&quot;pgt_prev();&quot;
+        ///         style=&quot;cursor: pointer;
+        ///                 margin-right: 7px;&quot;
+        ///         src=&quot;../imgs/scroll_prev.png&quot;
+        ///         title=&quot;Previous Page&quot; /&gt;
+        ///
+        ///    &lt;img id=&quot;pgt_next&quot;
+        ///         onclick=&quot;pgt_next();&quot;
+        ///         style=&quot;cursor: pointer;
+        ///                 margin-right: 7px;&quot;
+        ///         src=&quot;../imgs/scroll_next.png&quot;
+        ///         title=&quot;Next Page&quot; /&gt;
+        ///&lt;/div&gt;
+        ///&lt;div class=&quot;l&quot;
+        ///     id=&quot;pgt_choose&quot; ;
+        ///     onclick=&quot;pgt_choose();&quot;
+        ///     title= [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ht_pgt {
+            get {
+                return ResourceManager.GetString("ht_pgt", resourceCulture);
             }
         }
         
