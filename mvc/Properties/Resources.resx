@@ -221,7 +221,8 @@
 &lt;/script&gt;</value>
   </data>
   <data name="ht_pgt" xml:space="preserve">
-    <value>&lt;div class="l"&gt;
+    <value>&lt;br&gt;
+&lt;div class="l"&gt;
 
     &lt;img id="pgt_prev"
          onclick="pgt_prev();"
@@ -237,21 +238,19 @@
          src="../imgs/scroll_next.png"
          title="Next Page" /&gt;
 &lt;/div&gt;
-&lt;div class="l"
+&lt;div class="pgt_choose"
      id="pgt_choose" ;
      onclick="pgt_choose();"
      title="Choose Page"&gt;
     &lt;div class="l"&gt;
-        Page:
+        Pg:
     &lt;/div&gt;
 
     &lt;div class="l"
-        id="pgt_cur"
-    &gt;
+         id="pgt_cur"&gt;
         1
     &lt;/div&gt;
-    &lt;div class="cls"
-     &gt;        
+    &lt;div class="cls"&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cls"&gt;

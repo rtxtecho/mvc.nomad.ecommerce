@@ -12,7 +12,6 @@ c_serv = 0;
 $.ajax({ cache: false });
 
 $.ajaxSetup({
-    // Disable caching of AJAX responses
     cache: false
 });
 
@@ -205,6 +204,8 @@ function get_sub_comps(
                        );
             $("#pgt"
                 ).html(r[2]);
+
+            reconc_pgt();
         }
     });
 }
@@ -292,6 +293,45 @@ function pgt_next() {
 
     reconc_pgt();
 
+    get_sub_comps(0);
+}
+
+function pgt_choose() {
+    var mx =
+            $("#pgt"
+                ).attr("mx"
+                      );
+    var r = "";
+
+    for (pg_i = 1; pg_i <= mx; pg_i++
+        ) {
+        r += "<div" +
+                                " class = 'srs'" +
+                    " onclick = pgt_choose2(" + pg_i +
+                                           ");" +
+              ">";
+
+        r += "Pg " + pg_i;
+
+        r += "</div>";
+    }
+
+    var topic = "Choose";
+
+    sub_scrn_go(r, topic
+               );
+}   
+
+function pgt_choose2(cur
+                   ) {
+    sub_scrn_stop();
+    $("#pgt"
+        ).attr("cur", cur
+              )
+    $("#pgt_cur"
+        ).html(" " + cur
+              );
+    reconc_pgt();
     get_sub_comps(0);
 }
 

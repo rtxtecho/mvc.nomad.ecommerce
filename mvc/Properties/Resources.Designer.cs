@@ -171,7 +171,8 @@ namespace mvc.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;div class=&quot;l&quot;&gt;
+        ///   Looks up a localized string similar to &lt;br&gt;
+        ///&lt;div class=&quot;l&quot;&gt;
         ///
         ///    &lt;img id=&quot;pgt_prev&quot;
         ///         onclick=&quot;pgt_prev();&quot;
@@ -187,10 +188,9 @@ namespace mvc.Properties {
         ///         src=&quot;../imgs/scroll_next.png&quot;
         ///         title=&quot;Next Page&quot; /&gt;
         ///&lt;/div&gt;
-        ///&lt;div class=&quot;l&quot;
+        ///&lt;div class=&quot;pgt_choose&quot;
         ///     id=&quot;pgt_choose&quot; ;
-        ///     onclick=&quot;pgt_choose();&quot;
-        ///     title= [rest of string was truncated]&quot;;.
+        ///     onclick=&quot;pgt_choose() [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ht_pgt {
             get {

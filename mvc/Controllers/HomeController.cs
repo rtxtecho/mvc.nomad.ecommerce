@@ -135,14 +135,14 @@ namespace mvc.Controllers
                     }
                     pgt = Properties.Resources.ht_pgt;
 
-                    mx = comps_pgt[client]
-                      .Count.ToString();
                 }
-                if (comps_pgt[client].Count > 0
+                if (comps_pgt[client].Count == 0
                     )
                     comps_pgt[client].Add(1, new List<business.component_p
                                                       >()
                                          );
+                    mx = comps_pgt[client]
+                      .Count.ToString();
                 comps = comps_pgt[client][pgt_cur];
             }
             else
@@ -489,17 +489,17 @@ namespace mvc.Controllers
                 )
             {
                 comp = components_p.get(cur);
-
+                comp.name = name;
                 comp.revise("name", name
                            );
 
                 int i = comps_pgt.Count;
                 comps_pgt[client][i].Add(comp
                                           );
-
-            }
+                }
+            
             return "0" + s240 + super_comp;
-        }
+            }
 
         public string create_sub_comp_name(int c_serv
                                           )

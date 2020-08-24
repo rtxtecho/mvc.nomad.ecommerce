@@ -185,3 +185,9 @@
 {
     overflow-y: auto;  margin-top: 7px;
 }
+
+.pgt_choose
+{
+    cursor: pointer;
+    color: rgb(70, 70, 177);
+}
