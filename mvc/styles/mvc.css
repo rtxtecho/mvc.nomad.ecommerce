@@ -191,3 +191,8 @@
     cursor: pointer;
     color: rgb(70, 70, 177);
 }
+
+.filter
+{
+    margin-top: 2px;
+}

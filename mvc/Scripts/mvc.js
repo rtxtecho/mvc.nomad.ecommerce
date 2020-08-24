@@ -819,3 +819,29 @@ function unchoose(
          ).css("height", cur_y - 140
                  );
     }
+
+var filter_content = [];
+function filter() {
+    var cur = document.getElementById("txt_filter"
+                                     ).value;
+
+    cur = cur.toUpper();
+    $("#filter").attr("cur", cur
+                     );
+
+    for (i = 0; i < filter_content.length; i++
+        ) {
+        var name = filter_content[i].name.toUpper();
+
+        var ID = filter_content[i].ID.toUpper();
+        if (filter_content[i].name.toUpper().indexOf(cur) > -1
+            )
+            $("#comp_" + ID
+             ).css("display", ""
+                   );
+        else
+            $("#comp_" + ID
+        ).css("display", "none"
+              );
+    }
+}

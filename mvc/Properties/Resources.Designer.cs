@@ -117,12 +117,12 @@ namespace mvc.Properties {
         ///        &lt;div class=&quot;cls&quot;&gt;
         ///        &lt;/div&gt;
         ///    &lt;/div&gt;
-        ///    &lt;div class=&quot;sub_comps_0&quot;
-        ///         id=&quot;sub_comps_0&quot;&gt;
-        ///    &lt;/div&gt;
-        ///    &lt;div class=&quot;pgt&quot;
-        ///         id=&quot;pgt&quot;
-        ///         cur=&quot;1&quot; [rest of string was truncated]&quot;;.
+        ///    &lt;div class = &quot;filter&quot;
+        ///         id=&quot;filter&quot;
+        ///         cur=&quot;&quot;
+        ///    &gt;
+        ///       &lt;input type=&quot;text&quot;
+        ///              placeholder=&quot; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ht_edit_comps {
             get {

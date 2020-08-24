@@ -1,34 +1,42 @@
-﻿<br>
-<div class="l">
+﻿<div class="tree"
+     id="tree">
+    <div class="tree_topic">
+        <div class="l">
+            Components
+        </div>
 
-    <img id="pgt_prev"
-         onclick="pgt_prev();"
-         style="cursor: pointer;
-                 margin-right: 7px;"
-         src="../imgs/scroll_prev.png"
-         title="Previous Page" />
-
-    <img id="pgt_next"
-         onclick="pgt_next();"
-         style="cursor: pointer;
-                 margin-right: 7px;"
-         src="../imgs/scroll_next.png"
-         title="Next Page" />
+        <div class="create_comp"
+             onclick="create_sub_comp(0);">
+            <img src="../imgs/get.png"
+                 class="create_comp_img" />
+            New
+        </div>
+        <div class="cls">
+        </div>
+    </div>
+    <div class = "filter"
+         id="filter"
+         cur=""
+    >
+       <input type="text"
+              placeholder="Filter"
+              id="txt_filter"
+              class="txt_filter"
+              onkeyup="filter();"
+        />  
+    </div>
+    <div class="sub_comps_0"
+         id="sub_comps_0">
+    </div>
+    <div class="pgt"
+         id="pgt"
+         cur="1"
+         mx="0">
+    </div>
 </div>
-<div class="pgt_choose"
-     id="pgt_choose" ;
-     onclick="pgt_choose();"
-     title="Choose Page">
-    <div class="l">
-        Pg:
-    </div>
 
-    <div class="l"
-         id="pgt_cur">
-        1
-    </div>
-    <div class="cls">
-    </div>
+<div class="comp_content"
+     id="comp_content">
 </div>
 <div class="cls">
 </div>

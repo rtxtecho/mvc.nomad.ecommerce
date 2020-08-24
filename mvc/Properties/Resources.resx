@@ -162,14 +162,24 @@
         &lt;div class="cls"&gt;
         &lt;/div&gt;
     &lt;/div&gt;
+    &lt;div class = "filter"
+         id="filter"
+         cur=""
+    &gt;
+       &lt;input type="text"
+              placeholder="Filter"
+              id="txt_filter"
+              class="txt_filter"
+              onkeyup="filter();"
+        /&gt;  
+    &lt;/div&gt;
     &lt;div class="sub_comps_0"
          id="sub_comps_0"&gt;
     &lt;/div&gt;
     &lt;div class="pgt"
          id="pgt"
          cur="1"
-         mx="0"
-    &gt;
+         mx="0"&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
