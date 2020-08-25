@@ -112,3 +112,223 @@ GO
 ALTER DATABASE [DB_121607_nomad] SET  READ_WRITE 
 GO
 
+USE [DB_121607_nomad]
+GO
+
+/****** Object:  Table [dbo].[cli]    Script Date: 8/25/2020 3:20:35 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[cli](
+	[cli] [varchar](80) NOT NULL,
+	[pcode] [varchar](80) NOT NULL,
+	[group_] [numeric](4, 0) NOT NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[cli] ADD  CONSTRAINT [DF_cli_cli]  DEFAULT ('') FOR [cli]
+GO
+
+ALTER TABLE [dbo].[cli] ADD  CONSTRAINT [DF_cli_pcode]  DEFAULT ('') FOR [pcode]
+GO
+
+ALTER TABLE [dbo].[cli] ADD  CONSTRAINT [DF_cli_group_]  DEFAULT ((0)) FOR [group_]
+GO
+
+USE [DB_121607_nomad]
+GO
+
+INSERT INTO [dbo].[cli]
+           ([cli]
+           ,[pcode]
+           ,[group_])
+     VALUES
+           ('READ_NOMAD',		   
+           'NOMAD',		   
+           0
+		   )
+		   
+GO
+
+INSERT INTO [dbo].[cli]
+           ([cli]
+           ,[pcode]
+           ,[group_])
+     VALUES
+           ('REVISE_NOMAD',	   
+           '_NOMAD',   
+           1
+		   )
+		   
+GO
+
+USE [DB_121607_nomad]
+GO
+
+/****** Object:  Table [dbo].[component]    Script Date: 8/25/2020 3:31:49 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[component](
+	[ID] [numeric](8, 0) IDENTITY(1,1) NOT NULL,
+	[name] [varchar](277) NOT NULL,
+	[comp_type] [numeric](2, 0) NOT NULL,
+	[super_comp] [numeric](8, 0) NOT NULL,
+	[img] [varbinary](max) NOT NULL,
+	[format] [varchar](8) NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[component] ADD  CONSTRAINT [DF_components_name]  DEFAULT ('') FOR [name]
+GO
+
+ALTER TABLE [dbo].[component] ADD  CONSTRAINT [DF_components_comp_type]  DEFAULT ((0)) FOR [comp_type]
+GO
+
+ALTER TABLE [dbo].[component] ADD  CONSTRAINT [DF_components_super_comp]  DEFAULT ((0)) FOR [super_comp]
+GO
+
+ALTER TABLE [dbo].[component] ADD  CONSTRAINT [DF_component_img]  DEFAULT ((0)) FOR [img]
+GO
+
+ALTER TABLE [dbo].[component] ADD  CONSTRAINT [DF_component_format]  DEFAULT ('') FOR [format]
+GO
+
+
+USE [DB_121607_nomad]
+GO
+
+/****** Object:  Table [dbo].[group_]    Script Date: 8/25/2020 3:32:40 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[group_](
+	[ID] [numeric](4, 0) NOT NULL,
+	[group_] [varchar](80) NOT NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[group_] ADD  CONSTRAINT [DF_group__ID]  DEFAULT ((0)) FOR [ID]
+GO
+
+ALTER TABLE [dbo].[group_] ADD  CONSTRAINT [DF_group__group_]  DEFAULT ('') FOR [group_]
+GO
+
+USE [DB_121607_nomad]
+GO
+
+INSERT INTO [dbo].[group_]
+           ([ID]
+           ,[group_])
+     VALUES
+           (0,
+           'read'
+		   )
+GO
+
+INSERT INTO [dbo].[group_]
+           ([ID]
+           ,[group_])
+     VALUES
+           (1,
+           'edit'
+		   )
+GO
+
+USE [DB_121607_nomad]
+GO
+
+/****** Object:  Table [dbo].[img_stg]    Script Date: 8/25/2020 3:33:50 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[img_stg](
+	[ID] [varchar](20) NOT NULL,
+	[img] [varbinary](max) NOT NULL,
+	[format] [varchar](8) NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[img_stg] ADD  CONSTRAINT [DF_img_stg_ID]  DEFAULT ('') FOR [ID]
+GO
+
+ALTER TABLE [dbo].[img_stg] ADD  CONSTRAINT [DF_img_stg_img]  DEFAULT ((0)) FOR [img]
+GO
+
+ALTER TABLE [dbo].[img_stg] ADD  CONSTRAINT [DF_img_stg_format]  DEFAULT ('') FOR [format]
+GO
+
+USE [DB_121607_nomad]
+GO
+
+/****** Object:  Table [dbo].[type_]    Script Date: 8/25/2020 3:34:07 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[type_](
+	[ID] [numeric](2, 0) NOT NULL,
+	[type_] [varchar](77) NOT NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[type_] ADD  CONSTRAINT [DF_type__ID]  DEFAULT ((0)) FOR [ID]
+GO
+
+ALTER TABLE [dbo].[type_] ADD  CONSTRAINT [DF_type__type_]  DEFAULT ('') FOR [type_]
+GO
+
+USE [DB_121607_nomad]
+GO
+
+INSERT INTO [dbo].[type_]
+           ([ID]
+           ,[type_])
+     VALUES
+           (1,
+           'Product'
+		   )
+GO
+
+INSERT INTO [dbo].[type_]
+           ([ID]
+           ,[type_])
+     VALUES
+           (2
+           'Sub Product'
+		   )
+GO
+
+
+INSERT INTO [dbo].[type_]
+           ([ID]
+           ,[type_])
+     VALUES
+           (3,
+           'Piece'
+		   )
+GO
+
+
+INSERT INTO [dbo].[type_]
+           ([ID]
+           ,[type_])
+     VALUES
+           (4,
+           'Stock'
+		   )
+GO

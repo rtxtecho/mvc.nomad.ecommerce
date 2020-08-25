@@ -11,7 +11,8 @@ namespace mvc.business
         public static SqlConnection get_conn(
                                            )
         {
-            string conn_str = "Data Source=tcp:s20.winhost.com;Initial Catalog=DB_121607_nomad;User ID=DB_121607_nomad_user;Password=nomad;Integrated Security=False;";
+            string conn_str = "";
+            
             SqlConnection
             conn = new SqlConnection();
 
