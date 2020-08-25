@@ -5,6 +5,8 @@ $(document).ajaxError(function (event, request, settings) {
 });
 
 var s240 = String.fromCharCode(240);
+var s241 = String.fromCharCode(241);
+var s242 = String.fromCharCode(242);
 var ni = "<i>Not Identified</i>"
 
 c_serv = 0;
@@ -119,12 +121,62 @@ function sub_scrn2_stop() {
               );
 }
 
+function logon() {
+    c_serv++;
+    var url = "/Home/logon";
+    $.get(url,
+         {
+             c_serv: c_serv
+         },
+    function (r) {
+        $("#prim"
+        ).html(r
+               )
+    });
+}
+
+function logon2() {
+    c_serv++;
+    var url = "/Home/logon2";
+    var cli =
+        $("#logon_txt"
+          ).val();
+    var pcode =
+         $("#pcode_txt"
+          ).val();
+
+    $("#pcode_txt"
+    ).val("");
+
+    $.get(url,
+         {   cli: cli,
+             pcode: pcode,
+             c_serv: c_serv
+         },
+    function (r) {
+        r = r.split(s240);
+
+        if (r[0] == 0
+            )
+        {
+            client = r[1];
+            edit_comps();
+        }
+        else
+        {
+            $("#log_issues"
+                ).html(r[1]
+                      );
+        }
+    });
+}                   
+ 
 function edit_comps() {
     progress_go();
     c_serv++;
     var url = "/Home/edit_comps";
     $.get(url,
-         {
+         {   client: client,
              c_serv: c_serv
          },
     function (r) {
@@ -134,7 +186,6 @@ function edit_comps() {
         $("#prim"
         ).html(r[0]
                )
-        client = r[1];
         get_sub_comps(0);
         revise_screen();
     });
@@ -179,13 +230,17 @@ function get_sub_comps(
         return;
     }
     c_serv++;
+    var search =
+    $("#search").attr("cur"
+                     );
+
     var pgt_cur = $("#pgt"
                    ).attr("cur"
                          );
     var url = "/Home/get_sub_comps";
     $.get(url,
          {
-             pgt_cur: pgt_cur, client: client,
+             pgt_cur: pgt_cur, client: client, search: search,
              comp: comp,
              c_serv: c_serv
          },
@@ -206,6 +261,13 @@ function get_sub_comps(
                 ).html(r[2]);
 
             reconc_pgt();
+        }
+        if (r[1] == 0
+            )
+        {
+            filter_compile(r[4]
+                             );
+            filter();
         }
     });
 }
@@ -365,7 +427,7 @@ function unchoose(
         var url = "/Home/get_comp";
         $.get(url,
              {
-                 comp: comp,
+                 comp: comp, client: client,
                  c_serv: c_serv
              },
         function (r) {
@@ -484,7 +546,13 @@ function unchoose(
                             comp
                           ) {
         progress_go();
-        var name = $("#create_sub_comp_name"
+        var mx =
+                $("#pgt"
+                    ).attr("mx"
+                          );
+        pgt_choose2(mx);
+        
+       var name = $("#create_sub_comp_name"
                     ).attr("cur");
         if (name == undefined
             )
@@ -816,7 +884,7 @@ function unchoose(
     function revise_screen()
     {
         $("#sub_comps_0"
-         ).css("height", cur_y - 140
+         ).css("height", cur_y - 167
                  );
     }
 
@@ -825,23 +893,51 @@ function filter() {
     var cur = document.getElementById("txt_filter"
                                      ).value;
 
-    cur = cur.toUpper();
+    cur = cur.toUpperCase();
     $("#filter").attr("cur", cur
                      );
 
     for (i = 0; i < filter_content.length; i++
         ) {
-        var name = filter_content[i].name.toUpper();
+        var name = filter_content[i].name.toUpperCase();
 
-        var ID = filter_content[i].ID.toUpper();
-        if (filter_content[i].name.toUpper().indexOf(cur) > -1
+        var ID = filter_content[i].ID;
+        if (filter_content[i].name.toUpperCase()
+            .indexOf(cur) > -1
             )
-            $("#comp_" + ID
-             ).css("display", ""
+            $("#comp_" + "prim_" + ID
+            ).css("display", ""
                    );
         else
-            $("#comp_" + ID
+            $("#comp_" + "prim_" + ID
         ).css("display", "none"
               );
     }
+}
+function filter_compile(content
+                       )
+{
+    filter_content = [];
+    content = content.split(s242);
+    for (i = 0; i < content.length; i ++
+        )
+    {
+        c = content[i].split(s241);
+        r = new Object;
+        r.ID = c[0];
+        r.name = c[1];
+        filter_content[i] = r;
+    }
+}
+
+function search()
+{
+    var cur = document.getElementById("txt_search"
+                                     ).value;
+
+    cur = cur.toUpperCase();
+    $("#search").attr("cur", cur
+                     );
+
+    get_sub_comps(0);
 }

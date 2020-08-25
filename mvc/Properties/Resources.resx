@@ -162,17 +162,30 @@
         &lt;div class="cls"&gt;
         &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class = "filter"
+
+    &lt;div class="filter"
          id="filter"
-         cur=""
-    &gt;
-       &lt;input type="text"
-              placeholder="Filter"
-              id="txt_filter"
-              class="txt_filter"
-              onkeyup="filter();"
-        /&gt;  
+         cur=""&gt;
+        &lt;input type="text"
+               placeholder="Filter"
+               id="txt_filter"
+               class="txt_filter"
+               onkeyup="filter();" /&gt;
     &lt;/div&gt;
+    &lt;div class="search"
+         id="search"
+         cur=""&gt;
+        &lt;input type="text"
+               placeholder="Search"
+               id="txt_search"
+               class="txt_search"               
+         /&gt;
+        &lt;img src="../imgs/search.png"
+             title="search"
+             class="search_img"
+             onclick="search();"
+        /&gt;
+    &lt;/div&gt;    
     &lt;div class="sub_comps_0"
          id="sub_comps_0"&gt;
     &lt;/div&gt;
@@ -267,16 +280,13 @@
 &lt;/div&gt;</value>
   </data>
   <data name="ht_rec" xml:space="preserve">
-    <value>&lt;div 
-     class="rec_prim"
-     id = "//id//"
-     onclick="//method//"
+    <value>&lt;div class="rec_prim //cls//"
+    id="//id//"
+    onclick="//method//"
 &gt;
     //nomencl//
-    &lt;div
-         class="rec_sub"
-         id = "//id//_"
-    &gt;
+    &lt;div class="rec_sub"
+         id="//id//_"&gt;
         //summary//
     &lt;/div&gt;
 &lt;/div&gt;</value>
@@ -298,5 +308,41 @@
 &lt;br /&gt;
 
     Max: //c_mx//</value>
+  </data>
+  <data name="logon" xml:space="preserve">
+    <value>Provide proper credentials to Logon
+&lt;br /&gt;
+&lt;div class="logon"
+     id="logon"&gt;
+    &lt;div id="log_issues"&gt;
+    &lt;/div&gt;
+&lt;div
+        class = "r"
+&gt;
+    Logon:
+    &lt;input type="text"
+           class="logon_txt"
+           id="logon_txt" /&gt;
+&lt;/div&gt;
+&lt;div class="cls"
+  &gt;
+
+&lt;/div&gt;
+
+        &lt;br /&gt;
+    &lt;div class="r"&gt;
+        Passcode:
+        &lt;input type="password"
+               class="logon_txt"
+               id="pcode_txt" /&gt;
+    &lt;/div&gt;
+    &lt;div class="cls"&gt;
+    &lt;/div&gt;
+        &lt;br /&gt;
+        &lt;div class="logon_verify"
+             onclick="logon2();"&gt;
+            Logon
+        &lt;/div&gt;
+   &lt;/div&gt;</value>
   </data>
 </root>

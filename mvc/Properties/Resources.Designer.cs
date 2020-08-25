@@ -117,12 +117,12 @@ namespace mvc.Properties {
         ///        &lt;div class=&quot;cls&quot;&gt;
         ///        &lt;/div&gt;
         ///    &lt;/div&gt;
-        ///    &lt;div class = &quot;filter&quot;
+        ///
+        ///    &lt;div class=&quot;filter&quot;
         ///         id=&quot;filter&quot;
-        ///         cur=&quot;&quot;
-        ///    &gt;
-        ///       &lt;input type=&quot;text&quot;
-        ///              placeholder=&quot; [rest of string was truncated]&quot;;.
+        ///         cur=&quot;&quot;&gt;
+        ///        &lt;input type=&quot;text&quot;
+        ///               placeholder=&quot;Filt [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ht_edit_comps {
             get {
@@ -199,16 +199,13 @@ namespace mvc.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;div 
-        ///     class=&quot;rec_prim&quot;
-        ///     id = &quot;//id//&quot;
-        ///     onclick=&quot;//method//&quot;
+        ///   Looks up a localized string similar to &lt;div class=&quot;rec_prim //cls//&quot;
+        ///    id=&quot;//id//&quot;
+        ///    onclick=&quot;//method//&quot;
         ///&gt;
         ///    //nomencl//
-        ///    &lt;div
-        ///         class=&quot;rec_sub&quot;
-        ///         id = &quot;//id//_&quot;
-        ///    &gt;
+        ///    &lt;div class=&quot;rec_sub&quot;
+        ///         id=&quot;//id//_&quot;&gt;
         ///        //summary//
         ///    &lt;/div&gt;
         ///&lt;/div&gt;.
@@ -246,6 +243,44 @@ namespace mvc.Properties {
         internal static string ht_t_bo {
             get {
                 return ResourceManager.GetString("ht_t_bo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provide proper credentials to Logon
+        ///&lt;br /&gt;
+        ///&lt;div class=&quot;logon&quot;
+        ///     id=&quot;logon&quot;&gt;
+        ///    &lt;div id=&quot;log_issues&quot;&gt;
+        ///    &lt;/div&gt;
+        ///&lt;div
+        ///        class = &quot;r&quot;
+        ///&gt;
+        ///    Logon:
+        ///    &lt;input type=&quot;text&quot;
+        ///           class=&quot;logon_txt&quot;
+        ///           id=&quot;logon_txt&quot; /&gt;
+        ///&lt;/div&gt;
+        ///&lt;div class=&quot;cls&quot;
+        ///  &gt;
+        ///
+        ///&lt;/div&gt;
+        ///
+        ///        &lt;br /&gt;
+        ///    &lt;div class=&quot;r&quot;&gt;
+        ///        Passcode:
+        ///        &lt;input type=&quot;password&quot;
+        ///               class=&quot;logon_txt&quot;
+        ///               id=&quot;pcode_txt&quot; /&gt;
+        ///    &lt;/div&gt;
+        ///    &lt;div class=&quot;cls&quot;&gt;
+        ///    &lt;/div&gt;
+        ///        &lt;br /&gt;
+        ///   [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string logon {
+            get {
+                return ResourceManager.GetString("logon", resourceCulture);
             }
         }
     }

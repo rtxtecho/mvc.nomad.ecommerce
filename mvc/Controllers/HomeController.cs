@@ -26,14 +26,49 @@ namespace mvc.Controllers
                   >
                   >();
 
+        static SortedList<string, string
+                          > search_cur = new SortedList<string, string
+                                                       >();
+
+        static SortedList<string, cli_p
+                          > clis = new SortedList<string, cli_p
+                                                  >();
+
         public string s240 = "" + (char)240;
+        public string s241 = "" + (char)241;
+        public string s242 = "" + (char)242;
         public string ni = "<i>Not Identified</i>";
+        public string logon()
+        {
+            return Properties.Resources.logon;
+        }
+
+        public string logon2(string cli, string pcode
+                            )
+        {
+            cli_p c = clis_p.get(cli, pcode
+                                   );
+
+            if (c == null
+                )
+            {
+                string r = "Either the logon or passocde is not correct";
+
+                return "4" + s240 + r;
+            }
+            string u = DateTime.Now.Ticks.ToString();
+            clis.Add(u, c
+                    );
+
+            return "0" + s240 + u;
+        }
 
         [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
         public ActionResult Index()
         {
             return View();
         }
+
         public string get_record(
                                  string nomencl,
                                  string summary,
@@ -41,6 +76,30 @@ namespace mvc.Controllers
                                  string id
                                  )
         {
+            return get_record(
+                              nomencl,
+                              summary,
+                              method,
+                              id,
+                              true
+                              );
+        }
+
+        public string get_record(
+                                 string nomencl,
+                                 string summary,
+                                 string method,
+                                 string id,
+                                 bool edit
+                                )
+        {
+            string cls = "";
+            if (!edit
+                )
+                method = "";
+            else
+                cls = "edit";
+
             string r = Properties.Resources.ht_rec.Replace("//nomencl//", nomencl
                                                            )
                                                    .Replace("//summary//", summary
@@ -48,20 +107,30 @@ namespace mvc.Controllers
                                                    .Replace("//method//", method
                                                            )
                                                    .Replace("//id//", id
+                                                           )
+                                                   .Replace("//cls//", cls
                                                            );
             return r;
         }
+
         public string edit_comps(int c_serv
                                  )
         {
-            string client = DateTime.Now.Ticks.ToString();
-            return Properties.Resources.ht_edit_comps + s240 + client;
+            return Properties.Resources.ht_edit_comps;
         }
 
-        public string get_comp(
-                                    int comp, int c_serv
+        public string get_comp(int comp, string client,
+                                    int c_serv
                                    )
         {
+            string cur = client;
+
+            cli_p c = clis[cur];
+            bool edit = !true;
+            if (c.group_ == 1
+                )
+                edit = true;
+
             component_p comp_ = components_p.get(comp
                                                );
 
@@ -71,13 +140,17 @@ namespace mvc.Controllers
             string r = "";
 
             r += get_record("Name", comp_.name, "edit_comp_name(" + comp +
-                                                                  ");", "edit_comp_name"
+                                                                  ");", "edit_comp_name", edit
                            );
 
             r += get_record("Type", type, "edit_comp_type(" + comp +
-                                                                 ");", "edit_comp_type"
+                                                                 ");", "edit_comp_type", edit
                           );
-            string edit_img = Properties.Resources.ht_edit_img_choose.Replace("//comp//", comp.ToString()
+            string edit_img = "";
+
+            if (edit
+                )
+            edit_img = Properties.Resources.ht_edit_img_choose.Replace("//comp//", comp.ToString()
                                                                            );
             string resu = Properties.Resources.ht_edit_comp.Replace("//content//", r
                                                                    )
@@ -86,15 +159,16 @@ namespace mvc.Controllers
                                                                    )
                                                            .Replace("//edit img//", edit_img
                                                                    );
-
             return resu;
         }
 
         public string get_sub_comps(
-                                    int comp, int pgt_cur, string client,
+                                    int comp, int pgt_cur, string client, string search,
                                     int c_serv
                                    )
         {
+            string cur = client;
+            cli_p c_ = clis[cur];
             List<component_p
                 > comps = null;
             string pgt = "";
@@ -102,12 +176,50 @@ namespace mvc.Controllers
             if (comp == 0
                 )
             {
+                search = search.Trim();
+                {
+                    search = search.ToUpper();
+                    if (!search_cur.ContainsKey(client
+                                              )
+                        )
+                    {
+                        search_cur.Add(client, search
+                                       );
+                        if (comps_pgt.ContainsKey(client
+                                                 )
+                            )
+                            comps_pgt.Remove(client);
+                    }
+                    else
+                    {
+                        if (search == search_cur[client]
+                            )
+                        {
+                        }
+                        else
+                        {
+                            search_cur[client] =
+                                search;
+                            if (comps_pgt.ContainsKey(client
+                                                     )
+                                )
+                                comps_pgt.Remove(client);
+                        }
+                    }
+                }
+
                 if (!comps_pgt.ContainsKey(client
                                          )
                     )
                 { List<component_p
                       >
-                  compss = components_p.get_sub_comps(0);
+                  compss = null;
+
+                    if (search == ""
+                        ) compss =
+                        components_p.get_sub_comps(0);
+                    else compss =
+                        components_p.search(search);
 
                     int i = 17;
                     int cur_i = 0;
@@ -134,25 +246,35 @@ namespace mvc.Controllers
                         comps_pgt[client][cur_i].Add(c);
                     }
                     pgt = Properties.Resources.ht_pgt;
-
                 }
+
                 if (comps_pgt[client].Count == 0
                     )
                     comps_pgt[client].Add(1, new List<business.component_p
                                                       >()
                                          );
-                    mx = comps_pgt[client]
-                      .Count.ToString();
+                mx = comps_pgt[client]
+                  .Count.ToString();
                 comps = comps_pgt[client][pgt_cur];
             }
             else
                 comps = components_p.get_sub_comps(comp);
 
             string r = "";
+            string filter_content = "";
 
             foreach (component_p c in comps
                       )
             {
+                if (!filter_content.Equals("")
+                    )
+                    filter_content += s242;
+                r += "<div " +
+                              "class = ''" +
+                              "id = 'comp_prim_" + c.ID +
+                                   "'" +
+                    ">";
+                filter_content += c.ID + s241 + c.name;
                 r += "<div " +
                            "class = 'get_sub' " +
                            "onclick = 'get_sub_comps(" + c.ID +
@@ -176,36 +298,39 @@ namespace mvc.Controllers
                            "id = 'comp_" + c.ID +
                                 "'" +
                       ">";
+                if (c_.group_ == 1
+                    )
+                {
+                    r += "<div " +
+                               "class = 'get_sub' " +
+                               "title = 'Create Sub Component" +
+                                       "' " +
+                               "onclick = 'create_sub_comp(" + c.ID +
+                                                          ");" +
+                                         "'" +
+                         ">";
 
-                r += "<div " +
-                           "class = 'get_sub' " +
-                           "title = 'Create Sub Component" +
-                                   "' " +
-                           "onclick = 'create_sub_comp(" + c.ID +
-                                                      ");" +
-                                     "'" +
-                     ">";
+                    r += "<img src='" + "../imgs/create_sub.png" +
+                                  "'" +
+                          "/>";
 
-                r += "<img src='" + "../imgs/create_sub.png" +
-                              "'" +
-                      "/>";
+                    r += "</div>";
 
-                r += "</div>";
+                    r += "<div " +
+                               "class = 'get_sub' " +
+                               "title='Delete Component" +
+                                      "' " +
+                               "onclick = 'purge_comp(" + c.ID +
+                                                          ");" +
+                                         "'" +
+                         ">";
 
-                r += "<div " +
-                           "class = 'get_sub' " +
-                           "title='Delete Component" +
-                                  "' " +
-                           "onclick = 'purge_comp(" + c.ID +
-                                                      ");" +
-                                     "'" +
-                     ">";
+                    r += "<img src='../imgs/reject.png" +
+                                  "'" +
+                          "/>";
 
-                r += "<img src='../imgs/reject.png" +
-                              "'" +
-                      "/>";
-
-                r += "</div>";
+                    r += "</div>";
+                }
 
                 r += "<div " +
                            "class = 'l'" +
@@ -262,13 +387,14 @@ namespace mvc.Controllers
                      ">";
 
                 r += "</div>";
+                r += "</div>";
             }
             if (r == ""
                 )
                 r = "<i>" + "No Sub Components" +
                       "</i>";
 
-            return r + s240 + comp + s240 + pgt + s240 + mx;
+            return r + s240 + comp + s240 + pgt + s240 + mx + s240 + filter_content;
         }
 
         public string get_t_bo(
@@ -493,7 +619,7 @@ namespace mvc.Controllers
                 comp.revise("name", name
                            );
 
-                int i = comps_pgt.Count;
+                int i = comps_pgt[client].Count;
                 comps_pgt[client][i].Add(comp
                                           );
                 }
@@ -678,5 +804,6 @@ namespace mvc.Controllers
             return "0" + s240 + comp + s240 + imgs.byte_to_base64(ims.img, ims.format
                                                                );
         }
+        
         }
     }

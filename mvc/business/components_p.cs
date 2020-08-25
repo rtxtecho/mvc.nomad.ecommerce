@@ -112,5 +112,41 @@ namespace mvc.business
 
             return comps;
         }
+
+        public static List<component_p> search(string content
+                                                     )
+        {
+            string r = "select * from component where name like @content";
+
+            r += " order by upper(name), ID";
+            sql_code.prms_p prms = new business.sql_code.prms_p();
+            prms.enroll("content", "%" + content +
+                                    "%", System.Data.SqlDbType.VarChar
+                        );
+
+            SqlConnection conn = null;
+
+            SqlDataReader SDR = sql_code.run_query(r, prms,
+                                                  ref conn
+                                                  );
+            List<component_p> comps = new List<business.component_p>();
+
+            for (; SDR.Read();
+                )
+            {
+                component_p c = get(SDR);
+
+                comps.Add(c);
+            }
+
+            SDR.Close();
+
+            conn.Close();
+
+            conn.Dispose();
+
+            return comps;
+        }
         }
     }
+        
